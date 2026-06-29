@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexander Mañana — IT Support Specialist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=SF+Pro+Display:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000000;
+    --near-black: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --white: #f5f5f7;
+    --white-dim: rgba(245,245,247,0.6);
+    --white-dimmer: rgba(245,245,247,0.35);
+    --accent: #2997ff;
+    --accent-glow: rgba(41,151,255,0.15);
+    --green: #30d158;
+    --text-body: 'Inter', -apple-system, sans-serif;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--text-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 52px;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.4s var(--ease);
+  }
+
+  .nav-logo {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white) !important;
+    background: var(--accent);
+    padding: 6px 16px;
+    border-radius: 980px;
+    transition: opacity 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85; transform: scale(0.98) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 52px 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(41,151,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-out) 0.2s forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-out) 0.35s forwards;
+  }
+
+  .hero-title strong {
+    font-weight: 600;
+    background: linear-gradient(135deg, #f5f5f7 0%, rgba(245,245,247,0.65) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-role {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-out) 0.5s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-out) 0.65s forwards;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 6px 14px;
+    border-radius: 980px;
+    border: 1px solid var(--border);
+    color: var(--white-dim);
+    background: rgba(255,255,255,0.04);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--border-hover);
+    color: var(--white);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-out) 0.8s forwards;
+  }
+
+  .btn-primary {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 980px;
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s var(--ease);
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: scale(0.98); }
+  .btn-primary:active { transform: scale(0.95); }
+
+  .btn-secondary {
+    font-size: 15px;
+    font-weight: 400;
+    padding: 14px 32px;
+    border-radius: 980px;
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid rgba(41,151,255,0.3);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s var(--ease);
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background: var(--accent-glow);
+    border-color: rgba(41,151,255,0.6);
+    transform: scale(0.98);
+  }
+
+  .btn-secondary:active { transform: scale(0.95); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s var(--ease-out) 1.4s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--white-dimmer), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  .scroll-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white-dimmer);
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 120px 24px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--white-dim);
+    max-width: 540px;
+    line-height: 1.55;
+  }
+
+  /* ── STATS BAR ── */
+  #stats {
+    padding: 0 24px 80px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .stat-item {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: var(--surface2); }
+
+  .stat-number {
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-number span { color: var(--accent); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--white-dimmer);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── SCRIPTS ── */
+  #scripts { border-top: 1px solid var(--border); }
+
+  .scripts-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .script-card {
+    background: var(--surface);
+    padding: 40px 36px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.25s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .script-card:first-child { border-radius: 18px 0 0 18px; }
+  .script-card:last-child { border-radius: 0 18px 18px 0; }
+
+  .script-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(41,151,255,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .script-card:hover { background: var(--surface2); }
+  .script-card:hover::after { opacity: 1; }
+  .script-card:active { transform: scale(0.99); }
+
+  .script-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(41,151,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    font-size: 20px;
+  }
+
+  .script-name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .script-desc {
+    font-size: 14px;
+    color: var(--white-dimmer);
+    line-height: 1.55;
+    margin-bottom: 28px;
+  }
+
+  .script-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 980px;
+    background: rgba(255,255,255,0.06);
+    color: var(--white-dimmer);
+  }
+
+  /* ── CODE PREVIEW ── */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 48px;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .code-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .code-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  .code-dot.red { background: #ff5f57; }
+  .code-dot.yellow { background: #febc2e; }
+  .code-dot.green { background: #28c840; }
+
+  .code-filename {
+    font-size: 12px;
+    color: var(--white-dimmer);
+    margin-left: 8px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  pre {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--white-dim);
+    white-space: pre;
+  }
+
+  .kw { color: #fc5fa3; }
+  .fn { color: #67b7ff; }
+  .str { color: #fc6a5d; }
+  .cm { color: rgba(255,255,255,0.25); font-style: italic; }
+  .var { color: #41a1c0; }
+  .num { color: #d0bf69; }
+
+  /* ── RUNBOOKS ── */
+  #runbooks { border-top: 1px solid var(--border); }
+
+  .runbooks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 56px;
+  }
+
+  .runbook-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 32px;
+    background: var(--surface);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.2s var(--ease), padding-left 0.3s var(--ease-out);
+    position: relative;
+  }
+
+  .runbook-row:first-child { border-radius: 16px 16px 0 0; }
+  .runbook-row:last-child { border-radius: 0 0 16px 16px; }
+  .runbook-row:hover { background: var(--surface2); padding-left: 40px; }
+  .runbook-row:active { transform: scale(0.995); }
+
+  .runbook-num {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white-dimmer);
+    font-family: 'SF Mono', monospace;
+  }
+
+  .runbook-info {}
+
+  .runbook-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .runbook-sub {
+    font-size: 13px;
+    color: var(--white-dimmer);
+  }
+
+  .runbook-time {
+    font-size: 13px;
+    color: var(--white-dimmer);
+    white-space: nowrap;
+  }
+
+  .priority-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 980px;
+    white-space: nowrap;
+  }
+
+  .p2 { background: rgba(255,159,10,0.12); color: #ff9f0a; }
+  .p3 { background: rgba(48,209,88,0.12); color: #30d158; }
+
+  /* ── STACK ── */
+  #stack { border-top: 1px solid var(--border); }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+  }
+
+  .stack-group {
+    background: var(--surface);
+    padding: 36px 40px;
+    transition: background 0.2s;
+  }
+
+  .stack-group:first-child { border-radius: 16px 0 0 0; }
+  .stack-group:nth-child(2) { border-radius: 0 16px 0 0; }
+  .stack-group:nth-child(3) { border-radius: 0 0 0 16px; }
+  .stack-group:last-child { border-radius: 0 0 16px 0; }
+  .stack-group:hover { background: var(--surface2); }
+
+  .stack-group-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .stack-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stack-name {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .stack-bar-wrap {
+    width: 120px;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .stack-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), rgba(41,151,255,0.5));
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s var(--ease-out);
+  }
+
+  /* ── CERT ROADMAP ── */
+  #certs { border-top: 1px solid var(--border); }
+
+  .cert-track {
+    margin-top: 64px;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .cert-track::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), rgba(41,151,255,0.1));
+  }
+
+  .cert-item {
+    position: relative;
+    margin-bottom: 40px;
+    cursor: default;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .cert-item:hover { transform: translateX(6px); }
+
+  .cert-dot {
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--black);
+    transition: background 0.2s;
+  }
+
+  .cert-item:hover .cert-dot { background: var(--accent); }
+
+  .cert-item.done .cert-dot { background: var(--green); border-color: var(--green); }
+  .cert-item.done .cert-dot::after {
+    content: '✓';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 8px;
+    color: var(--black);
+    font-weight: 700;
+  }
+
+  .cert-phase {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white-dimmer);
+    margin-bottom: 4px;
+  }
+
+  .cert-name {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .cert-desc {
+    font-size: 14px;
+    color: var(--white-dimmer);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .contact-card {
+    margin-top: 56px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 72px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 300px;
+    background: radial-gradient(ellipse, rgba(41,151,255,0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .contact-sub {
+    font-size: 17px;
+    color: var(--white-dim);
+    margin-bottom: 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--white-dimmer);
+  }
+
+  .footer-loc {
+    font-size: 13px;
+    color: var(--white-dimmer);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 680px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 40px;
+    transform: scale(0.94) translateY(16px);
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .modal-overlay.open .modal {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .modal-close {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.14); transform: scale(1.1); }
+  .modal-close:active { transform: scale(0.9); }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50%       { opacity: 0.7; transform: scaleY(1.1); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .scripts-grid { grid-template-columns: 1fr; }
+    .script-card:first-child { border-radius: 18px 18px 0 0; }
+    .script-card:last-child { border-radius: 0 0 18px 18px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stack-grid { grid-template-columns: 1fr; }
+    .stack-group:first-child { border-radius: 16px 16px 0 0; }
+    .stack-group:nth-child(2) { border-radius: 0; }
+    .stack-group:nth-child(3) { border-radius: 0; }
+    .stack-group:last-child { border-radius: 0 0 16px 16px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+    .runbook-row { grid-template-columns: 1fr auto; }
+    .runbook-num, .runbook-time { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Alexander Mañana</a>
+  <ul class="nav-links">
+    <li><a onclick="scrollTo('scripts')">Scripts</a></li>
+    <li><a onclick="scrollTo('runbooks')">Runbooks</a></li>
+    <li><a onclick="scrollTo('stack')">Tech Stack</a></li>
+    <li><a onclick="scrollTo('certs')">Certifications</a></li>
+    <li><a class="nav-cta" href="https://www.linkedin.com/in/alexander-manana-sanchez-4a358a274" target="_blank">LinkedIn ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">IT Support Specialist · Santo Domingo, DR</p>
+  <h1 class="hero-title"><strong>Alexander</strong><br>Mañana Sánchez</h1>
+  <p class="hero-role">3+ years resolving what others escalate</p>
+  <div class="hero-tags">
+    <span class="tag">Microsoft 365</span>
+    <span class="tag">PowerShell</span>
+    <span class="tag">Networking</span>
+    <span class="tag">ServiceNow</span>
+    <span class="tag">Jira</span>
+    <span class="tag">Remote Support</span>
+    <span class="tag">Bilingual EN/ES</span>
+  </div>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://www.linkedin.com/in/alexander-manana-sanchez-4a358a274" target="_blank">View LinkedIn</a>
+    <a class="btn-secondary" onclick="scrollTo('scripts')">Explore Portfolio</a>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <div class="stat-number">3<span>+</span></div>
+      <div class="stat-label">Years of experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">PowerShell automation scripts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">SOPs & runbooks documented</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Languages: English & Spanish</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<section id="scripts">
+  <div class="scripts-header reveal">
+    <div>
+      <p class="section-eyebrow">PowerShell Automation</p>
+      <h2 class="section-title">Scripts that<br>do the work</h2>
+    </div>
+    <p class="section-sub">Real automation built for real IT environments — M365, Windows, and network infrastructure.</p>
+  </div>
+
+  <div class="scripts-grid reveal">
+
+    <div class="script-card" onclick="openModal('onboarding')">
+      <div class="script-icon">🔑</div>
+      <div class="script-name">User Onboarding</div>
+      <div class="script-desc">Automates new user creation in Microsoft 365: account setup, license assignment, and group membership via Microsoft Graph API.</div>
+      <div class="script-meta">
+        <span class="meta-tag">Microsoft Graph</span>
+        <span class="meta-tag">M365</span>
+        <span class="meta-tag">Identity</span>
+      </div>
+    </div>
+
+    <div class="script-card" onclick="openModal('cleanup')">
+      <div class="script-icon">🧹</div>
+      <div class="script-name">Disk Cleanup</div>
+      <div class="script-desc">Recovers disk space by clearing temp files, browser caches, Recycle Bin, and Windows Update artifacts — with a before/after report.</div>
+      <div class="script-meta">
+        <span class="meta-tag">Windows</span>
+        <span class="meta-tag">Maintenance</span>
+        <span class="meta-tag">Reporting</span>
+      </div>
+    </div>
+
+    <div class="script-card" onclick="openModal('network')">
+      <div class="script-icon">🌐</div>
+      <div class="script-name">Network Diagnostics</div>
+      <div class="script-desc">Runs ping, DNS resolution, port checks, and traceroute in a single script — outputs a structured report ready for escalation.</div>
+      <div class="script-meta">
+        <span class="meta-tag">Networking</span>
+        <span class="meta-tag">DNS</span>
+        <span class="meta-tag">Diagnostics</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="code-block reveal">
+    <div class="code-bar">
+      <div class="code-dot red"></div>
+      <div class="code-dot yellow"></div>
+      <div class="code-dot green"></div>
+      <span class="code-filename">network-diagnostic.ps1</span>
+    </div>
+    <pre><span class="cm"># Run ping, DNS, ports, traceroute — one command</span>
+<span class="kw">param</span>(
+  [<span class="var">string</span>]<span class="var">$Target</span>     = <span class="str">"google.com"</span>,
+  [<span class="var">switch</span>]<span class="var">$SaveReport</span>
+)
+
+<span class="cm"># ── PING TEST ─────────────────────────────────</span>
+<span class="var">$pingResults</span> = <span class="fn">Test-Connection</span> <span class="var">$Target</span> -Count <span class="num">4</span>
+<span class="var">$avg</span> = [<span class="var">math</span>]::<span class="fn">Round</span>((<span class="var">$pingResults</span> | <span class="fn">Measure-Object</span> ResponseTime -Average).Average, <span class="num">1</span>)
+<span class="fn">Write-Result</span> <span class="str">"Avg Latency"</span> <span class="str">"$avg ms"</span>
+
+<span class="cm"># ── PORT CHECK ────────────────────────────────</span>
+<span class="kw">foreach</span> (<span class="var">$p</span> <span class="kw">in</span> <span class="var">$ports</span>) {
+  <span class="var">$tcp</span> = <span class="fn">Test-NetConnection</span> -ComputerName <span class="var">$Target</span> -Port <span class="var">$p</span>.Port
+  <span class="fn">Write-Result</span> <span class="str">"$($p.Name)"</span> <span class="kw">$(if</span> (<span class="var">$tcp</span>.TcpTestSucceeded) { <span class="str">"✅ Open"</span> } <span class="kw">else</span> { <span class="str">"❌ Closed"</span> })
+}</pre>
+  </div>
+</section>
+
+<!-- RUNBOOKS -->
+<section id="runbooks">
+  <div class="reveal">
+    <p class="section-eyebrow">SOPs & Runbooks</p>
+    <h2 class="section-title">Every incident.<br>Documented.</h2>
+    <p class="section-sub">Step-by-step procedures built for consistency, speed, and seamless escalation.</p>
+  </div>
+
+  <div class="runbooks-list reveal">
+
+    <div class="runbook-row" onclick="openModal('pwreset')">
+      <span class="runbook-num">01</span>
+      <div class="runbook-info">
+        <div class="runbook-title">M365 Password Reset</div>
+        <div class="runbook-sub">Identity verification · Admin Center · PowerShell · MFA re-enrollment</div>
+      </div>
+      <span class="priority-badge p2">P2 — High</span>
+      <span class="runbook-time">5–10 min</span>
+    </div>
+
+    <div class="runbook-row" onclick="openModal('printer')">
+      <span class="runbook-num">02</span>
+      <div class="runbook-info">
+        <div class="runbook-title">Printer Troubleshooting</div>
+        <div class="runbook-sub">Network printers · Spooler reset · Driver reinstall · Escalation tree</div>
+      </div>
+      <span class="priority-badge p3">P3 — Medium</span>
+      <span class="runbook-time">10–30 min</span>
+    </div>
+
+    <div class="runbook-row" onclick="openModal('vpn')">
+      <span class="runbook-num">03</span>
+      <div class="runbook-info">
+        <div class="runbook-title">VPN Connectivity</div>
+        <div class="runbook-sub">AnyConnect · GlobalProtect · FortiClient · Certificate errors · Auth failures</div>
+      </div>
+      <span class="priority-badge p2">P2 — High</span>
+      <span class="runbook-time">10–20 min</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="reveal">
+    <p class="section-eyebrow">Technical Stack</p>
+    <h2 class="section-title">Tools I work<br>with daily</h2>
+  </div>
+  <div class="stack-grid reveal" id="stackGrid">
+    <div class="stack-group">
+      <div class="stack-group-title">Productivity Suite</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-name">Microsoft 365</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="95"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Exchange Online</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="85"></div></div></div>
+        <div class="stack-item"><span class="stack-name">SharePoint</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="75"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Teams</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="90"></div></div></div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Scripting & Automation</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-name">PowerShell</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="70"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Batch / CMD</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="65"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Microsoft Graph</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="60"></div></div></div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Networking</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-name">TCP/IP · DNS · DHCP</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="85"></div></div></div>
+        <div class="stack-item"><span class="stack-name">VPN (AnyConnect, etc.)</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="80"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Switches & Routers</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="75"></div></div></div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Ticketing & ITSM</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-name">ServiceNow</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="88"></div></div></div>
+        <div class="stack-item"><span class="stack-name">Jira</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="82"></div></div></div>
+        <div class="stack-item"><span class="stack-name">ITIL Principles</span><div class="stack-bar-wrap"><div class="stack-bar" data-pct="72"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="reveal">
+    <p class="section-eyebrow">Certification Roadmap</p>
+    <h2 class="section-title">Building toward<br>what's next</h2>
+    <p class="section-sub">A structured path from support fundamentals to cloud and security specialization.</p>
+  </div>
+
+  <div class="cert-track reveal">
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 1 — Now</div>
+      <div class="cert-name">Google IT Support Certificate</div>
+      <div class="cert-desc">Foundation credential, ATS-recognized, available in English & Spanish via Coursera</div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 1 — Now</div>
+      <div class="cert-name">CompTIA A+</div>
+      <div class="cert-desc">Global standard for IT support professionals — required for most international remote roles</div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 2 — Next</div>
+      <div class="cert-name">ITIL 4 Foundation</div>
+      <div class="cert-desc">Covers Incident Management, SLA, and Change Management — the exact keywords in target job descriptions</div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 2 — Next</div>
+      <div class="cert-name">CompTIA Network+</div>
+      <div class="cert-desc">Validates advanced networking skills — high demand in remote IT support roles</div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 3 — Cloud</div>
+      <div class="cert-name">Microsoft MD-102 · AZ-900</div>
+      <div class="cert-desc">Endpoint Administration and Azure Fundamentals — transition into cloud-enabled support roles</div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-phase">Phase 4 — Security</div>
+      <div class="cert-name">CompTIA Security+</div>
+      <div class="cert-desc">Entry point into security specialization — broadens eligible roles and increases earning potential</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card reveal">
+    <p class="section-eyebrow" style="text-align:center">Available for Remote Work</p>
+    <h2 class="contact-title">Open to international<br>IT Support roles</h2>
+    <p class="contact-sub">Bilingual in English and Spanish · Santo Domingo, Dominican Republic</p>
+    <div class="contact-links">
+      <a class="btn-primary" href="https://www.linkedin.com/in/alexander-manana-sanchez-4a358a274" target="_blank">Connect on LinkedIn</a>
+      <a class="btn-secondary" href="mailto:alexander@example.com">Send Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-text">© 2025 Alexander Mañana Sánchez</span>
+  <span class="footer-loc">📍 Santo Domingo, Dominican Republic</span>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle"></span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// Scroll helper
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      // Animate stack bars when stack section appears
+      if (e.target.closest('#stack') || e.target.id === 'stackGrid') {
+        setTimeout(animateBars, 200);
+      }
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animate tech bars
+function animateBars() {
+  document.querySelectorAll('.stack-bar').forEach(bar => {
+    bar.style.width = bar.dataset.pct + '%';
+  });
+}
+
+// Card glow effect
+document.querySelectorAll('.script-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+});
+
+// Modal content
+const modalData = {
+  onboarding: {
+    title: '🔑 User Onboarding Script',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Automates the full onboarding flow for a new Microsoft 365 user: account creation via Microsoft Graph API, license assignment, and group membership — all from a single interactive script.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
+      <span class="meta-tag">Microsoft Graph</span><span class="meta-tag">M365</span><span class="meta-tag">PowerShell 5.1+</span><span class="meta-tag">Admin Role Required</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:12px;padding:20px;font-size:13px;color:var(--white-dim);line-height:1.7;font-family:monospace">
+      <span style="color:#fc5fa3">.\</span>user-onboarding.ps1<br>
+      <span style="color:rgba(255,255,255,0.3)"># Interactive — prompts for name, dept, role, manager</span><br>
+      <span style="color:rgba(255,255,255,0.3)"># Creates account, assigns license, adds to groups</span><br>
+      <span style="color:rgba(255,255,255,0.3)"># Outputs summary with temp password</span>
+    </div>`
+  },
+  cleanup: {
+    title: '🧹 Disk Cleanup Script',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Recovers disk space by targeting temp files, all major browser caches (Chrome, Edge, Firefox), the Recycle Bin, and Windows Update download cache. Generates a before/after summary report saved to the Desktop.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
+      <span class="meta-tag">Windows</span><span class="meta-tag">Run as Admin</span><span class="meta-tag">Auto-report</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:12px;padding:20px;font-size:13px;color:var(--white-dim);line-height:1.7;font-family:monospace">
+      <span style="color:#fc5fa3">.\</span>disk-cleanup.ps1<br>
+      <span style="color:rgba(255,255,255,0.3)"># Cleans: %TEMP%, %TMP%, C:\Windows\Temp</span><br>
+      <span style="color:rgba(255,255,255,0.3)"># Clears: Chrome, Edge, Firefox caches</span><br>
+      <span style="color:rgba(255,255,255,0.3)"># Report saved to Desktop automatically</span>
+    </div>`
+  },
+  network: {
+    title: '🌐 Network Diagnostic Script',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Comprehensive one-command network diagnostic: checks gateway, runs ping with latency stats, tests DNS resolution against multiple servers, checks 5 key ports, and traces the route to any target. Optional -SaveReport flag exports full output as .txt.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
+      <span class="meta-tag">Networking</span><span class="meta-tag">DNS</span><span class="meta-tag">Ports</span><span class="meta-tag">Traceroute</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:12px;padding:20px;font-size:13px;color:var(--white-dim);line-height:1.7;font-family:monospace">
+      <span style="color:#fc5fa3">.\</span>network-diagnostic.ps1 -Target <span style="color:#fc6a5d">"google.com"</span><br>
+      <span style="color:#fc5fa3">.\</span>network-diagnostic.ps1 -Target <span style="color:#fc6a5d">"8.8.8.8"</span> -SaveReport<br>
+      <span style="color:rgba(255,255,255,0.3)"># Runs: ping · gateway · DNS · ports · traceroute</span>
+    </div>`
+  },
+  pwreset: {
+    title: '🔐 M365 Password Reset SOP',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Complete Standard Operating Procedure for Microsoft 365 password resets. Covers identity verification, account status checks, reset via Admin Center and PowerShell, MFA re-enrollment, secure password delivery, and ticket documentation.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="priority-badge p2">P2 — High</span><span class="meta-tag">5–10 min avg</span><span class="meta-tag">Identity & Access</span>
+    </div>
+    <div style="margin-top:16px">
+      ${['Verify user identity (2 factors)', 'Check account status in Admin Center', 'Reset password + force change on login', 'Handle MFA re-enrollment if needed', 'Deliver password securely (phone only)', 'Confirm sign-in and close ticket'].map((s,i) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--white-dim)"><span style="color:var(--accent);font-family:monospace;font-size:12px">0${i+1}</span>${s}</div>`).join('')}
+    </div>`
+  },
+  printer: {
+    title: '🖨️ Printer Troubleshooting SOP',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Structured diagnostic guide covering network printers, local USB printers, and shared printers on Windows 10/11. Includes Print Spooler reset script, driver reinstall steps, and clear escalation criteria.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="priority-badge p3">P3 — Medium</span><span class="meta-tag">10–30 min avg</span><span class="meta-tag">Hardware</span>
+    </div>
+    <div style="margin-top:16px">
+      ${['Basic checks: power, paper, ink, default printer', 'Network printer: ping IP, access web interface', 'Clear Print Spooler via PowerShell (as Admin)', 'USB printer: swap cable/port, check Device Manager', 'Driver: uninstall, reboot, reinstall from vendor', 'Escalate hardware damage to field technician'].map((s,i) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--white-dim)"><span style="color:var(--accent);font-family:monospace;font-size:12px">0${i+1}</span>${s}</div>`).join('')}
+    </div>`
+  },
+  vpn: {
+    title: '🔒 VPN Connectivity SOP',
+    body: `<p style="color:var(--white-dim);font-size:14px;margin-bottom:20px;line-height:1.6">Covers the 5 most common VPN failure scenarios for Cisco AnyConnect, GlobalProtect, FortiClient, and Windows built-in VPN. Each scenario includes root cause, PowerShell commands, and precise escalation criteria.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="priority-badge p2">P2 — High</span><span class="meta-tag">10–20 min avg</span><span class="meta-tag">Networking</span>
+    </div>
+    <div style="margin-top:16px">
+      ${['"Unable to connect" → firewall/port block', '"Auth failed" → expired password or locked account', '"Connected, no resources" → DNS or split tunneling', '"Certificate error" → wrong system time or expired cert', 'Restart VPN service via PowerShell', 'Reinstall client if all steps fail'].map((s,i) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--white-dim)"><span style="color:var(--accent);font-family:monospace;font-size:12px">0${i+1}</span>${s}</div>`).join('')}
+    </div>`
+  }
+};
+
+function openModal(key) {
+  const data = modalData[key];
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalBody').innerHTML = data.body;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal({ target: document.getElementById('modal') });
+});
+</script>
+</body>
+</html>
