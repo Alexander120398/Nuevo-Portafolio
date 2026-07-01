@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Mañana — IT Support Specialist & Full-Stack Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #fafafa;
+            --bg-elevated: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-muted: #86868b;
+            --accent: #0071e3;
+            --accent-soft: rgba(0,113,227,0.08);
+            --accent-border: rgba(0,113,227,0.15);
+            --border: rgba(0,0,0,0.06);
+            --border-strong: rgba(0,0,0,0.1);
+            --success: #34c759;
+            --warning: #ff9500;
+            --danger: #ff3b30;
+            --purple: #af52de;
+            --purple-soft: rgba(175,82,222,0.08);
+            --teal: #30b0c7;
+            --teal-soft: rgba(48,176,199,0.08);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.08);
+            --radius-sm: 8px;
+            --radius: 16px;
+            --radius-lg: 24px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(250,250,250,0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lang-btn {
+            padding: 4px 10px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+            display: inline;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 48px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-location {
+            font-size: 14px;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.8s forwards;
+        }
+
+        .hero-location a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .hero-location a:hover { opacity: 0.7; }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1s forwards;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        /* ── EXPERIENCE ── */
+        .experience-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .exp-card:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exp-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .exp-company {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .exp-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .exp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .exp-list li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .exp-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ── TECH STACK ── */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            border-color: var(--border-strong);
+        }
+
+        .tech-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            background: var(--bg-elevated);
+            flex-shrink: 0;
+        }
+
+        .tech-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .tech-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+
+        /* ── PROJECTS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-strong);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-lg);
+        }
+
+        .project-card.active::before { opacity: 1; }
+
+        .project-card[data-project="kore"]::before { background: linear-gradient(90deg, var(--danger), var(--warning)); }
+        .project-card[data-project="dast"]::before { background: linear-gradient(90deg, var(--purple), var(--accent)); }
+        .project-card[data-project="helpdesk"]::before { background: linear-gradient(90deg, var(--success), var(--teal)); }
+        .project-card[data-project="tomorrowdesk"]::before { background: linear-gradient(90deg, var(--accent), #5ac8fa); }
+        .project-card[data-project="dominoes"]::before { background: linear-gradient(90deg, var(--warning), var(--danger)); }
+        .project-card[data-project="codequest"]::before { background: linear-gradient(90deg, var(--teal), var(--purple)); }
+
+        .project-card[data-project="kore"] .project-icon { background: var(--danger); color: white; }
+        .project-card[data-project="dast"] .project-icon { background: var(--purple); color: white; }
+        .project-card[data-project="helpdesk"] .project-icon { background: var(--success); color: white; }
+        .project-card[data-project="tomorrowdesk"] .project-icon { background: var(--accent); color: white; }
+        .project-card[data-project="dominoes"] .project-icon { background: var(--warning); color: white; }
+        .project-card[data-project="codequest"] .project-icon { background: var(--teal); color: white; }
+
+        .project-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            background: var(--bg-elevated);
+        }
+
+        .project-card:hover .project-icon { transform: scale(1.08) rotate(-3deg); }
+
+        .project-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .project-card .project-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.55;
+            margin-bottom: 16px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .project-cta {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .project-card:hover .project-cta { opacity: 1; }
+
+        .project-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .project-stat {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .project-stat strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* ── SCRIPTS ── */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .script-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .script-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-strong);
+        }
+
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .script-card:hover::before { opacity: 1; }
+
+        .script-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-lg);
+        }
+
+        .script-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: var(--bg-elevated);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .script-card:hover .script-icon { transform: scale(1.08); }
+
+        .script-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .script-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.55;
+            margin-bottom: 16px;
+        }
+
+        .script-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .tag.primary { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-border); }
+        .tag.success { background: rgba(52,199,89,0.08); color: var(--success); border-color: rgba(52,199,89,0.15); }
+        .tag.warning { background: rgba(255,149,0,0.08); color: var(--warning); border-color: rgba(255,149,0,0.15); }
+        .tag.danger { background: rgba(255,59,48,0.08); color: var(--danger); border-color: rgba(255,59,48,0.15); }
+        .tag.purple { background: var(--purple-soft); color: var(--purple); border-color: rgba(175,82,222,0.15); }
+        .tag.teal { background: var(--teal-soft); color: var(--teal); border-color: rgba(48,176,199,0.15); }
+
+        .script-cta {
+            margin-top: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .script-card:hover .script-cta { opacity: 1; }
+
+        /* ── TERMINAL ── */
+        .terminal-section {
+            padding: 80px 0;
+        }
+
+        .terminal-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .terminal {
+            background: #1c1c1e;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .terminal-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            letter-spacing: 0.02em;
+        }
+
+        .terminal-body {
+            padding: 24px 24px 32px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            min-height: 420px;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .term-line {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2px;
+            opacity: 0;
+            animation: termFadeIn 0.15s ease forwards;
+        }
+
+        .term-prompt { color: #34c759; }
+        .term-cmd { color: #fff; }
+        .term-output { color: rgba(255,255,255,0.5); }
+        .term-success { color: #34c759; }
+        .term-error { color: #ff5f57; }
+        .term-warn { color: #febc2e; }
+        .term-info { color: #5ac8fa; }
+        .term-metric { color: #bf5af2; }
+        .term-separator { color: rgba(255,255,255,0.15); letter-spacing: -1px; }
+        .term-header { color: #ff9f0a; font-weight: 600; }
+
+        @keyframes termFadeIn {
+            from { opacity: 0; transform: translateX(-4px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .terminal-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .term-btn {
+            padding: 10px 24px;
+            border-radius: 980px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--border-strong);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .term-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .term-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .term-btn.primary:hover {
+            background: #005bb5;
+            box-shadow: 0 4px 16px rgba(0,113,227,0.25);
+        }
+
+        .description-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .description-box h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .description-box p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .description-box .desc-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        /* ── SOPS ── */
+        .sops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .sop-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sop-card:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .sop-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .sop-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .sop-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .sop-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .sop-meta span {
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ── CERTS ── */
+        .cert-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cert-phase {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-phase:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .cert-phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .cert-phase-badge {
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .cert-phase-badge.now {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid var(--accent-border);
+        }
+
+        .cert-phase-badge.next {
+            background: rgba(52,199,89,0.08);
+            color: var(--success);
+            border: 1px solid rgba(52,199,89,0.15);
+        }
+
+        .cert-phase-badge.future {
+            background: rgba(255,149,0,0.08);
+            color: var(--warning);
+            border: 1px solid rgba(255,149,0,0.15);
+        }
+
+        .cert-phase h3 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .cert-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .cert-item {
+            padding: 16px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .cert-item h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .cert-item p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── ACHIEVEMENTS ── */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .achievement-card:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .achievement-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .achievement-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .achievement-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── CONTACT ── */
+        .contact-section {
+            text-align: center;
+            padding: 100px 0 60px;
+        }
+
+        .contact-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 980px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid var(--border-strong);
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 0 60px; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .section { padding: 60px 0; }
+            .section-header h2 { font-size: 28px; }
+            .scripts-grid, .sops-grid, .projects-grid, .achievements-grid { grid-template-columns: 1fr; }
+            .exp-header { flex-direction: column; }
+            .exp-meta { text-align: left; }
+            .terminal-body { padding: 16px; font-size: 11px; }
+            .cert-items { grid-template-columns: 1fr; }
+            .lang-selector { padding: 3px 6px; }
+            .lang-btn { padding: 3px 8px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo">AM</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+                    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="#scripts" data-i18n="nav_scripts">Scripts</a></li>
+                    <li><a href="#terminal" data-i18n="nav_demo">Live Demo</a></li>
+                    <li><a href="#sops" data-i18n="nav_sops">Runbooks</a></li>
+                    <li><a href="#certs" data-i18n="nav_certs">Certifications</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+                    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-i18n="hero_badge">Disponible para roles remotos</span>
+            </div>
+            <h1><span class="accent">Alexander</span> Mañana Sánchez</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Especialista en Soporte Técnico & Producción con 5+ años de experiencia. Diseño y construyo las mismas herramientas ITSM que uso en operaciones diarias: monitoreo predictivo, portales de seguridad, dashboards y automatización con PowerShell.</p>
+            <p class="hero-location">Santo Domingo, República Dominicana · <a href="mailto:Alexmanana12@gmail.com">Alexmanana12@gmail.com</a></p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">5+</div>
+                    <div class="stat-label" data-i18n="stat_years">Años de Experiencia</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label" data-i18n="stat_projects">Proyectos ITSM</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label" data-i18n="stat_scripts">Scripts PowerShell</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">21</div>
+                    <div class="stat-label" data-i18n="stat_branches">Sucursales Cubiertas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label" data-i18n="stat_langs">Idiomas EN/ES</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="exp_title">Experiencia Profesional</h2>
+                <p data-i18n="exp_subtitle">Trayectoria combinando soporte técnico avanzado con desarrollo autónomo de herramientas</p>
+            </div>
+            <div class="experience-grid reveal">
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title" data-i18n="exp1_title">Especialista de Soporte Técnico & Producción</div>
+                            <div class="exp-company">Grupo Read</div>
+                        </div>
+                        <div class="exp-meta">
+                            <div>2025 – Presente</div>
+                            <div>Santo Domingo, RD</div>
+                        </div>
+                    </div>
+                    <ul class="exp-list">
+                        <li data-i18n="exp1_1">Soporte técnico avanzado L1/L2 para infraestructura de 21 sucursales a nivel nacional.</li>
+                        <li data-i18n="exp1_2">Desarrollo autónomo de Kore: sistema de monitoreo predictivo de fallas IT (Python, FastAPI, SQLite, análisis SMART de discos, detección de anomalías).</li>
+                        <li data-i18n="exp1_3">Construcción de portal DAST de seguridad con integración OWASP ZAP, JWT/RBAC y generación automática de tickets — 42/42 pruebas aprobadas.</li>
+                        <li data-i18n="exp1_4">Implementación de HelpDesk Pro/SITIC: sistema full-stack de gestión de tickets con React, Supabase realtime, RBAC y vistas múltiples.</li>
+                        <li data-i18n="exp1_5">Dashboard HelpDesk (~4,500 líneas, Docker Compose, Leaflet.js, caché multinivel, cobertura de 21 sucursales con mapeo geográfico).</li>
+                        <li data-i18n="exp1_6">Despliegue masivo de agente GLPI mediante scripts PowerShell y Bash para Windows, Ubuntu/Debian y distribuciones RPM.</li>
+                        <li data-i18n="exp1_7">Producción de reportes ejecutivos de inventario IT para directivos (HTML/PDF editorial con Chart.js).</li>
+                    </ul>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title" data-i18n="exp2_title">Técnico de Soporte IT</div>
+                            <div class="exp-company">Accumed Corp by Lear</div>
+                        </div>
+                        <div class="exp-meta">
+                            <div>Oct 2022 – Dic 2024</div>
+                        </div>
+                    </div>
+                    <ul class="exp-list">
+                        <li data-i18n="exp2_1">Mantenimiento de equipos, soporte a usuarios y resolución de incidencias en entorno de manufactura.</li>
+                        <li data-i18n="exp2_2">Gestión de activos tecnológicos y coordinación con proveedores externos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="projects_title">Proyectos Destacados</h2>
+                <p data-i18n="projects_subtitle">Herramientas ITSM construidas desde cero mientras mantenía operaciones diarias de soporte</p>
+            </div>
+            <div class="projects-grid reveal">
+                <div class="project-card" onclick="selectProject('kore')" id="proj-kore" data-project="kore">
+                    <div class="project-icon">◉</div>
+                    <h3>Kore</h3>
+                    <div class="project-subtitle">Monitoreo Predictivo IT</div>
+                    <p data-i18n="proj_kore_desc">Sistema de monitoreo predictivo de fallas IT con análisis SMART de discos y detección de anomalías. Dashboard industrial oscuro con métricas en tiempo real.</p>
+                    <div class="project-tags">
+                        <span class="tag danger">Python</span>
+                        <span class="tag danger">FastAPI</span>
+                        <span class="tag warning">SQLite</span>
+                        <span class="tag primary">SMART</span>
+                        <span class="tag">Anomaly Detection</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>Backend</strong> FastAPI</span>
+                        <span class="project-stat"><strong>DB</strong> SQLite</span>
+                        <span class="project-stat"><strong>UI</strong> Dashboard oscuro</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+
+                <div class="project-card" onclick="selectProject('dast')" id="proj-dast" data-project="dast">
+                    <div class="project-icon">◈</div>
+                    <h3>DAST Security Portal</h3>
+                    <div class="project-subtitle">Portal de Seguridad</div>
+                    <p data-i18n="proj_dast_desc">Portal de seguridad DAST con integración OWASP ZAP, autenticación JWT/RBAC y generación automática de tickets de vulnerabilidades. 42/42 pruebas superadas.</p>
+                    <div class="project-tags">
+                        <span class="tag purple">OWASP ZAP</span>
+                        <span class="tag purple">JWT</span>
+                        <span class="tag danger">RBAC</span>
+                        <span class="tag primary">DAST</span>
+                        <span class="tag">Security</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>Tests</strong> 42/42 passed</span>
+                        <span class="project-stat"><strong>Auth</strong> JWT/RBAC</span>
+                        <span class="project-stat"><strong>Scan</strong> OWASP ZAP</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+
+                <div class="project-card" onclick="selectProject('helpdesk')" id="proj-helpdesk" data-project="helpdesk">
+                    <div class="project-icon">◫</div>
+                    <h3>HelpDesk Pro / SITIC</h3>
+                    <div class="project-subtitle">Gestión de Tickets</div>
+                    <p data-i18n="proj_helpdesk_desc">Sistema full-stack de gestión de tickets con React, Supabase realtime, RBAC e interfaz multi-vista. Suscripciones en tiempo real para actualizaciones instantáneas.</p>
+                    <div class="project-tags">
+                        <span class="tag primary">React</span>
+                        <span class="tag success">Supabase</span>
+                        <span class="tag success">Realtime</span>
+                        <span class="tag danger">RBAC</span>
+                        <span class="tag">ITSM</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>Stack</strong> React + Supabase</span>
+                        <span class="project-stat"><strong>Sync</strong> Realtime</span>
+                        <span class="project-stat"><strong>Auth</strong> RBAC</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+
+                <div class="project-card" onclick="selectProject('tomorrowdesk')" id="proj-tomorrowdesk" data-project="tomorrowdesk">
+                    <div class="project-icon">△</div>
+                    <h3>TomorrowDesk Dashboard</h3>
+                    <div class="project-subtitle">Dashboard ITSM Geográfico</div>
+                    <p data-i18n="proj_tomorrowdesk_desc">Dashboard de ~4,500 líneas con Docker Compose, Leaflet.js para mapeo geográfico, caché multinivel y cobertura de 21 sucursales. Reportes ejecutivos HTML/PDF con Chart.js.</p>
+                    <div class="project-tags">
+                        <span class="tag primary">React 19</span>
+                        <span class="tag success">Node.js</span>
+                        <span class="tag warning">MongoDB</span>
+                        <span class="tag">Leaflet.js</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>LOC</strong> ~4,500</span>
+                        <span class="project-stat"><strong>Map</strong> Leaflet.js</span>
+                        <span class="project-stat"><strong>Deploy</strong> Docker</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+
+                <div class="project-card" onclick="selectProject('dominoes')" id="proj-dominoes" data-project="dominoes">
+                    <div class="project-icon">⬡</div>
+                    <h3>Dominoes RD</h3>
+                    <div class="project-subtitle">Juego Multijugador</div>
+                    <p data-i18n="proj_dominoes_desc">Juego multijugador de dominó dominicano con Socket.io para comunicación en tiempo real, IA para jugadores bot y diseño mobile-first. Experiencia de juego fluida y responsiva.</p>
+                    <div class="project-tags">
+                        <span class="tag warning">Socket.io</span>
+                        <span class="tag primary">IA</span>
+                        <span class="tag success">Mobile-first</span>
+                        <span class="tag">WebSockets</span>
+                        <span class="tag">Multiplayer</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>Real-time</strong> Socket.io</span>
+                        <span class="project-stat"><strong>AI</strong> Bot players</span>
+                        <span class="project-stat"><strong>Design</strong> Mobile-first</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+
+                <div class="project-card" onclick="selectProject('codequest')" id="proj-codequest" data-project="codequest">
+                    <div class="project-icon">◐</div>
+                    <h3>CodeQuest</h3>
+                    <div class="project-subtitle">RPG Educativo</div>
+                    <p data-i18n="proj_codequest_desc">RPG educativo de JavaScript con preguntas generadas por Claude API, efectos WebGL 3D y progresión de niveles. Aprendizaje interactivo de programación gamificado.</p>
+                    <div class="project-tags">
+                        <span class="tag teal">WebGL 3D</span>
+                        <span class="tag purple">Claude API</span>
+                        <span class="tag primary">JavaScript</span>
+                        <span class="tag">Gamification</span>
+                        <span class="tag">Education</span>
+                    </div>
+                    <div class="project-stats">
+                        <span class="project-stat"><strong>3D</strong> WebGL</span>
+                        <span class="project-stat"><strong>AI</strong> Claude API</span>
+                        <span class="project-stat"><strong>Type</strong> RPG Educativo</span>
+                    </div>
+                    <div class="project-cta">▶ <span data-i18n="project_cta">Ver demo en terminal</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="tech_title">Stack Técnico</h2>
+                <p data-i18n="tech_subtitle">Tecnologías que domino y uso diariamente en operaciones y desarrollo</p>
+            </div>
+            <div class="tech-grid reveal">
+                <div class="tech-item">
+                    <div class="tech-icon">◯</div>
+                    <div class="tech-info"><h4>Python</h4><p data-i18n="tech_python">FastAPI, scripting, análisis</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">△</div>
+                    <div class="tech-info"><h4>JavaScript/TypeScript</h4><p data-i18n="tech_js">React, Node.js, WebGL</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">▽</div>
+                    <div class="tech-info"><h4>PowerShell</h4><p data-i18n="tech_ps">Automatización AD/M365</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◇</div>
+                    <div class="tech-info"><h4>Bash</h4><p data-i18n="tech_bash">Linux, despliegue GLPI</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◈</div>
+                    <div class="tech-info"><h4>SQL</h4><p data-i18n="tech_sql">SQLite, consultas, reportes</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◉</div>
+                    <div class="tech-info"><h4>Docker</h4><p data-i18n="tech_docker">Compose, despliegue</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◐</div>
+                    <div class="tech-info"><h4>Microsoft 365</h4><p>Exchange, SharePoint, Teams</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◑</div>
+                    <div class="tech-info"><h4>Networking</h4><p>TCP/IP, DNS, DHCP, VPN</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◫</div>
+                    <div class="tech-info"><h4>Security</h4><p data-i18n="tech_security">JWT, RBAC, OWASP, DAST</p></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">◊</div>
+                    <div class="tech-info"><h4>ITSM</h4><p data-i18n="tech_itsm">ITIL 4, GLPI, SLAs, COBIT</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPTS -->
+    <section class="section" id="scripts">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="scripts_title">Scripts PowerShell</h2>
+                <p data-i18n="scripts_subtitle">Herramientas de automatización construidas para operaciones IT reales</p>
+            </div>
+            <div class="scripts-grid reveal">
+                <div class="script-card" onclick="selectScript('onboarding')" id="card-onboarding">
+                    <div class="script-icon">◫</div>
+                    <h3 data-i18n="script_onboarding_title">User Onboarding</h3>
+                    <p data-i18n="script_onboarding_desc">Automatiza la creación de nuevos usuarios en Microsoft 365: configuración de cuenta, asignación de licencias y membresía de grupos vía Microsoft Graph API.</p>
+                    <div class="script-tags">
+                        <span class="tag primary">Microsoft Graph</span>
+                        <span class="tag">M365</span>
+                        <span class="tag">Identity</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+                <div class="script-card" onclick="selectScript('cleanup')" id="card-cleanup">
+                    <div class="script-icon">◊</div>
+                    <h3 data-i18n="script_cleanup_title">Disk Cleanup</h3>
+                    <p data-i18n="script_cleanup_desc">Recupera espacio en disco limpiando archivos temporales, cachés de navegador, Papelera de Reciclaje y artefactos de Windows Update — con reporte antes/después.</p>
+                    <div class="script-tags">
+                        <span class="tag success">Windows</span>
+                        <span class="tag">Maintenance</span>
+                        <span class="tag">Reporting</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+                <div class="script-card" onclick="selectScript('network')" id="card-network">
+                    <div class="script-icon">◉</div>
+                    <h3 data-i18n="script_network_title">Network Diagnostics</h3>
+                    <p data-i18n="script_network_desc">Ejecuta ping, resolución DNS, verificación de puertos y traceroute en un solo script — genera un reporte estructurado listo para escalación.</p>
+                    <div class="script-tags">
+                        <span class="tag warning">Networking</span>
+                        <span class="tag">DNS</span>
+                        <span class="tag danger">Diagnostics</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+                <div class="script-card" onclick="selectScript('password')" id="card-password">
+                    <div class="script-icon">◈</div>
+                    <h3 data-i18n="script_password_title">Password Reset Automation</h3>
+                    <p data-i18n="script_password_desc">Automatiza el restablecimiento de contraseñas en Active Directory y M365 con verificación de identidad, historial de contraseñas y notificación automática al usuario.</p>
+                    <div class="script-tags">
+                        <span class="tag primary">Active Directory</span>
+                        <span class="tag danger">Security</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+                <div class="script-card" onclick="selectScript('service')" id="card-service">
+                    <div class="script-icon">↻</div>
+                    <h3 data-i18n="script_service_title">Service Monitor & Restart</h3>
+                    <p data-i18n="script_service_desc">Monitorea servicios críticos de Windows en tiempo real, reinicia automáticamente los que fallen, envía alertas por email y genera logs de incidentes.</p>
+                    <div class="script-tags">
+                        <span class="tag success">Windows Services</span>
+                        <span class="tag warning">Monitoring</span>
+                        <span class="tag">Alerts</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+                <div class="script-card" onclick="selectScript('backup')" id="card-backup">
+                    <div class="script-icon">◐</div>
+                    <h3 data-i18n="script_backup_title">M365 Backup Audit</h3>
+                    <p data-i18n="script_backup_desc">Audita el estado de respaldo de buzones de Exchange, archivos de OneDrive y sitios de SharePoint. Genera reporte de cumplimiento y detecta usuarios sin backup configurado.</p>
+                    <div class="script-tags">
+                        <span class="tag primary">M365</span>
+                        <span class="tag success">Compliance</span>
+                        <span class="tag">Audit</span>
+                    </div>
+                    <div class="script-cta">▶ <span data-i18n="script_cta">Ver demo en terminal</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TERMINAL -->
+    <section class="terminal-section" id="terminal">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="terminal_title">Demos en Vivo</h2>
+                <p data-i18n="terminal_subtitle">Selecciona un proyecto o script arriba y observa cómo se ejecuta en tiempo real</p>
+            </div>
+
+            <div class="description-box reveal" id="demoDescription">
+                <h4 id="descTitle">NetworkDiagnostic.ps1</h4>
+                <p id="descText">Haz clic en cualquier proyecto o script de arriba para ver su descripción y ejecutar la demo en la terminal.</p>
+                <div class="desc-features" id="descFeatures"></div>
+            </div>
+
+            <div class="terminal-wrapper reveal">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <div class="terminal-title" id="terminalTitle">Selecciona un proyecto o script para comenzar</div>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <div class="term-line" style="opacity:1"><span class="term-output">Haz clic en "Run Script" despues de seleccionar un proyecto o script de arriba.</span></div>
+                    </div>
+                </div>
+                <div class="terminal-controls">
+                    <button class="term-btn primary" onclick="runDemo()" id="runBtn">▶ <span data-i18n="btn_run">Ejecutar Demo</span></button>
+                    <button class="term-btn" onclick="clearTerminal()">↻ <span data-i18n="btn_clear">Limpiar</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOPS -->
+    <section class="section" id="sops">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="sops_title">SOPs & Runbooks</h2>
+                <p data-i18n="sops_subtitle">Cada incidente documentado. Procedimientos paso a paso para consistencia y velocidad.</p>
+            </div>
+            <div class="sops-grid reveal">
+                <div class="sop-card">
+                    <div class="sop-number">01</div>
+                    <h3 data-i18n="sop_1_title">M365 Password Reset</h3>
+                    <p data-i18n="sop_1_desc">Verificación de identidad · Admin Center · PowerShell · Re-enrolamiento MFA</p>
+                    <div class="sop-meta">
+                        <span>P2 — High</span>
+                        <span>5–10 min</span>
+                    </div>
+                </div>
+                <div class="sop-card">
+                    <div class="sop-number">02</div>
+                    <h3 data-i18n="sop_2_title">Printer Troubleshooting</h3>
+                    <p data-i18n="sop_2_desc">Impresoras de red · Reinicio de spooler · Reinstalación de drivers · Árbol de escalación</p>
+                    <div class="sop-meta">
+                        <span>P3 — Medium</span>
+                        <span>10–30 min</span>
+                    </div>
+                </div>
+                <div class="sop-card">
+                    <div class="sop-number">03</div>
+                    <h3 data-i18n="sop_3_title">VPN Connectivity</h3>
+                    <p data-i18n="sop_3_desc">AnyConnect · GlobalProtect · FortiClient · Errores de certificado · Fallas de autenticación</p>
+                    <div class="sop-meta">
+                        <span>P2 — High</span>
+                        <span>10–20 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" id="certs">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="certs_title">Educación y Certificaciones</h2>
+                <p data-i18n="certs_subtitle">Formación continua en TI, ciberseguridad y gestión de servicios</p>
+            </div>
+            <div class="cert-timeline reveal">
+                <div class="cert-phase">
+                    <div class="cert-phase-header">
+                        <span class="cert-phase-badge now" data-i18n="edu_title">Educación</span>
+                    </div>
+                    <div class="cert-items">
+                        <div class="cert-item">
+                            <h4 data-i18n="edu_degree">Ingeniería en Sistemas</h4>
+                            <p data-i18n="edu_uni">Universidad Dominicana O&M, Santo Domingo, RD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-phase">
+                    <div class="cert-phase-header">
+                        <span class="cert-phase-badge now" data-i18n="cert_now">En Proceso</span>
+                    </div>
+                    <div class="cert-items">
+                        <div class="cert-item">
+                            <h4>ITIL 4 Foundation</h4>
+                            <p data-i18n="cert_itil_desc">Autoestudio, meta 2026. Gestión de incidentes, SLAs y Change Management.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-phase">
+                    <div class="cert-phase-header">
+                        <span class="cert-phase-badge next" data-i18n="cert_completed">Completadas</span>
+                    </div>
+                    <div class="cert-items">
+                        <div class="cert-item">
+                            <h4>JavaScript & TypeScript</h4>
+                            <p>Cisco Networking Academy</p>
+                        </div>
+                        <div class="cert-item">
+                            <h4 data-i18n="cert_cyber">Fundamentos de Ciberseguridad</h4>
+                            <p>Cisco Networking Academy</p>
+                        </div>
+                        <div class="cert-item">
+                            <h4>Microsoft Excel — Beginner to Advanced</h4>
+                            <p>Udemy</p>
+                        </div>
+                        <div class="cert-item">
+                            <h4>CompTIA A+ (220-1001) & ITF+ (FCO-U61)</h4>
+                            <p>Udemy</p>
+                        </div>
+                        <div class="cert-item">
+                            <h4 data-i18n="cert_bootcamp">IT Support Technical Skills Bootcamp</h4>
+                            <p>Udemy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="section" id="achievements">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 data-i18n="ach_title">Logros Clave</h2>
+                <p data-i18n="ach_subtitle">Impacto medible en operaciones IT y desarrollo de herramientas propias</p>
+            </div>
+            <div class="achievements-grid reveal">
+                <div class="achievement-card">
+                    <div class="achievement-icon">⚡</div>
+                    <div>
+                        <h4 data-i18n="ach_1_title">5+ Herramientas ITSM Propias</h4>
+                        <p data-i18n="ach_1_desc">Diseñé y construí 5+ herramientas ITSM mientras mantenía el rol operativo de soporte diario.</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">◉</div>
+                    <div>
+                        <h4 data-i18n="ach_2_title">Monitoreo Predictivo</h4>
+                        <p data-i18n="ach_2_desc">Implementé detección de fallas de disco antes de que ocurran, reduciendo tiempos de inactividad.</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">◫</div>
+                    <div>
+                        <h4 data-i18n="ach_3_title">Cobertura 21 Sucursales</h4>
+                        <p data-i18n="ach_3_desc">Construí gestión de tickets con trazabilidad geográfica para 21 sucursales desde cero.</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">◈</div>
+                    <div>
+                        <h4 data-i18n="ach_4_title">100% Tests Aprobados</h4>
+                        <p data-i18n="ach_4_desc">42/42 pruebas automatizadas aprobadas en portal de seguridad DAST con OWASP ZAP.</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">△</div>
+                    <div>
+                        <h4 data-i18n="ach_5_title">Autonomía Full-Stack</h4>
+                        <p data-i18n="ach_5_desc">Capacidad de operar de forma autónoma en proyectos de arquitectura full-stack sin supervisión directa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 data-i18n="contact_title">Conectemos</h2>
+            <p data-i18n="contact_subtitle">¿Interesado en roles de soporte técnico avanzado, desarrollo ITSM oportunidades de colaboración?</p>
+            <div class="contact-links">
+                <a href="mailto:Alexmanana12@gmail.com" class="contact-link">✉ Alexmanana12@gmail.com</a>
+                <a href="https://www.linkedin.com/in/alexander-manana-sanchez-4a358a274/" class="contact-link" target="_blank" rel="noopener noreferrer">in LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>Alexander Mañana Sánchez — IT Support Specialist & Full-Stack Developer · Santo Domingo, República Dominicana</p>
+            <p style="margin-top: 4px;">Python · React · PowerShell · Docker · ITIL · Security</p>
+        </div>
+    </footer>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // INTERNATIONALIZATION
+        // ═══════════════════════════════════════════════════════════════
+        const translations = {
+            es: {
+                nav_exp: "Experiencia",
+                nav_projects: "Proyectos",
+                nav_scripts: "Scripts",
+                nav_demo: "Live Demo",
+                nav_sops: "Runbooks",
+                nav_certs: "Certificaciones",
+                nav_contact: "Contacto",
+                hero_badge: "Disponible para roles remotos",
+                hero_subtitle: "Especialista en Soporte Técnico & Producción con 5+ años de experiencia. Diseño y construyo las mismas herramientas ITSM que uso en operaciones diarias: monitoreo predictivo, portales de seguridad, dashboards y automatización con PowerShell.",
+                stat_years: "Años de Experiencia",
+                stat_projects: "Proyectos ITSM",
+                stat_scripts: "Scripts PowerShell",
+                stat_branches: "Sucursales Cubiertas",
+                stat_langs: "Idiomas EN/ES",
+                exp_title: "Experiencia Profesional",
+                exp_subtitle: "Trayectoria combinando soporte técnico avanzado con desarrollo autónomo de herramientas",
+                exp1_title: "Especialista de Soporte Técnico & Producción",
+                exp1_1: "Soporte técnico avanzado L1/L2 para infraestructura de 21 sucursales a nivel nacional.",
+                exp1_2: "Desarrollo autónomo de Kore: sistema de monitoreo predictivo de fallas IT (Python, FastAPI, SQLite, análisis SMART de discos, detección de anomalías).",
+                exp1_3: "Construcción de portal DAST de seguridad con integración OWASP ZAP, JWT/RBAC y generación automática de tickets — 42/42 pruebas aprobadas.",
+                exp1_4: "Implementación de HelpDesk Pro/SITIC: sistema full-stack de gestión de tickets con React, Supabase realtime, RBAC y vistas múltiples.",
+                exp1_5: "Dashboard HelpDesk (~4,500 líneas, Docker Compose, Leaflet.js, caché multinivel, cobertura de 21 sucursales con mapeo geográfico).",
+                exp1_6: "Despliegue masivo de agente GLPI mediante scripts PowerShell y Bash para Windows, Ubuntu/Debian y distribuciones RPM.",
+                exp1_7: "Producción de reportes ejecutivos de inventario IT para directivos (HTML/PDF editorial con Chart.js).",
+                exp2_title: "Técnico de Soporte IT",
+                exp2_1: "Mantenimiento de equipos, soporte a usuarios y resolución de incidencias en entorno de manufactura.",
+                exp2_2: "Gestión de activos tecnológicos y coordinación con proveedores externos.",
+                projects_title: "Proyectos Destacados",
+                projects_subtitle: "Herramientas ITSM construidas desde cero mientras mantenía operaciones diarias de soporte",
+                proj_kore_desc: "Sistema de monitoreo predictivo de fallas IT con análisis SMART de discos y detección de anomalías. Dashboard industrial oscuro con métricas en tiempo real.",
+                proj_dast_desc: "Portal de seguridad DAST con integración OWASP ZAP, autenticación JWT/RBAC y generación automática de tickets de vulnerabilidades. 42/42 pruebas superadas.",
+                proj_helpdesk_desc: "Sistema full-stack de gestión de tickets con React, Supabase realtime, RBAC e interfaz multi-vista. Suscripciones en tiempo real para actualizaciones instantáneas.",
+                proj_tomorrowdesk_desc: "Dashboard de ~4,500 líneas con Docker Compose, Leaflet.js para mapeo geográfico, caché multinivel y cobertura de 21 sucursales. Reportes ejecutivos HTML/PDF con Chart.js.",
+                proj_dominoes_desc: "Juego multijugador de dominó dominicano con Socket.io para comunicación en tiempo real, IA para jugadores bot y diseño mobile-first. Experiencia de juego fluida y responsiva.",
+                proj_codequest_desc: "RPG educativo de JavaScript con preguntas generadas por Claude API, efectos WebGL 3D y progresión de niveles. Aprendizaje interactivo de programación gamificado.",
+                project_cta: "Ver demo en terminal",
+                tech_title: "Stack Técnico",
+                tech_subtitle: "Tecnologías que domino y uso diariamente en operaciones y desarrollo",
+                tech_python: "FastAPI, scripting, análisis",
+                tech_js: "React, Node.js, WebGL",
+                tech_ps: "Automatización AD/M365",
+                tech_bash: "Linux, despliegue GLPI",
+                tech_sql: "SQLite, consultas, reportes",
+                tech_docker: "Compose, despliegue",
+                tech_security: "JWT, RBAC, OWASP, DAST",
+                tech_itsm: "ITIL 4, GLPI, SLAs, COBIT",
+                scripts_title: "Scripts PowerShell",
+                scripts_subtitle: "Herramientas de automatización construidas para operaciones IT reales",
+                script_onboarding_title: "User Onboarding",
+                script_onboarding_desc: "Automatiza la creación de nuevos usuarios en Microsoft 365: configuración de cuenta, asignación de licencias y membresía de grupos vía Microsoft Graph API.",
+                script_cleanup_title: "Disk Cleanup",
+                script_cleanup_desc: "Recupera espacio en disco limpiando archivos temporales, cachés de navegador, Papelera de Reciclaje y artefactos de Windows Update — con reporte antes/después.",
+                script_network_title: "Network Diagnostics",
+                script_network_desc: "Ejecuta ping, resolución DNS, verificación de puertos y traceroute en un solo script — genera un reporte estructurado listo para escalación.",
+                script_password_title: "Password Reset Automation",
+                script_password_desc: "Automatiza el restablecimiento de contraseñas en Active Directory y M365 con verificación de identidad, historial de contraseñas y notificación automática al usuario.",
+                script_service_title: "Service Monitor & Restart",
+                script_service_desc: "Monitorea servicios críticos de Windows en tiempo real, reinicia automáticamente los que fallen, envía alertas por email y genera logs de incidentes.",
+                script_backup_title: "M365 Backup Audit",
+                script_backup_desc: "Audita el estado de respaldo de buzones de Exchange, archivos de OneDrive y sitios de SharePoint. Genera reporte de cumplimiento y detecta usuarios sin backup configurado.",
+                script_cta: "Ver demo en terminal",
+                terminal_title: "Demos en Vivo",
+                terminal_subtitle: "Selecciona un proyecto o script arriba y observa cómo se ejecuta en tiempo real",
+                btn_run: "Ejecutar Demo",
+                btn_clear: "Limpiar",
+                sops_title: "SOPs & Runbooks",
+                sops_subtitle: "Cada incidente documentado. Procedimientos paso a paso para consistencia y velocidad.",
+                sop_1_title: "M365 Password Reset",
+                sop_1_desc: "Verificación de identidad · Admin Center · PowerShell · Re-enrolamiento MFA",
+                sop_2_title: "Printer Troubleshooting",
+                sop_2_desc: "Impresoras de red · Reinicio de spooler · Reinstalación de drivers · Árbol de escalación",
+                sop_3_title: "VPN Connectivity",
+                sop_3_desc: "AnyConnect · GlobalProtect · FortiClient · Errores de certificado · Fallas de autenticación",
+                certs_title: "Educación y Certificaciones",
+                certs_subtitle: "Formación continua en TI, ciberseguridad y gestión de servicios",
+                edu_title: "Educación",
+                edu_degree: "Ingeniería en Sistemas",
+                edu_uni: "Universidad Dominicana O&M, Santo Domingo, RD",
+                cert_now: "En Proceso",
+                cert_completed: "Completadas",
+                cert_itil_desc: "Autoestudio, meta 2026. Gestión de incidentes, SLAs y Change Management.",
+                cert_cyber: "Fundamentos de Ciberseguridad",
+                cert_bootcamp: "IT Support Technical Skills Bootcamp",
+                ach_title: "Logros Clave",
+                ach_subtitle: "Impacto medible en operaciones IT y desarrollo de herramientas propias",
+                ach_1_title: "5+ Herramientas ITSM Propias",
+                ach_1_desc: "Diseñé y construí 5+ herramientas ITSM mientras mantenía el rol operativo de soporte diario.",
+                ach_2_title: "Monitoreo Predictivo",
+                ach_2_desc: "Implementé detección de fallas de disco antes de que ocurran, reduciendo tiempos de inactividad.",
+                ach_3_title: "Cobertura 21 Sucursales",
+                ach_3_desc: "Construí gestión de tickets con trazabilidad geográfica para 21 sucursales desde cero.",
+                ach_4_title: "100% Tests Aprobados",
+                ach_4_desc: "42/42 pruebas automatizadas aprobadas en portal de seguridad DAST con OWASP ZAP.",
+                ach_5_title: "Autonomía Full-Stack",
+                ach_5_desc: "Capacidad de operar de forma autónoma en proyectos de arquitectura full-stack sin supervisión directa.",
+                contact_title: "Conectemos",
+                contact_subtitle: "¿Interesado en roles de soporte técnico avanzado, desarrollo ITSM oportunidades de colaboración?"
+            },
+            en: {
+                nav_exp: "Experience",
+                nav_projects: "Projects",
+                nav_scripts: "Scripts",
+                nav_demo: "Live Demo",
+                nav_sops: "Runbooks",
+                nav_certs: "Certifications",
+                nav_contact: "Contact",
+                hero_badge: "Available for remote roles",
+                hero_subtitle: "IT Support Specialist & Production with 5+ years of experience. I design and build the same ITSM tools I use in daily operations: predictive monitoring, security portals, dashboards, and PowerShell automation.",
+                stat_years: "Years Experience",
+                stat_projects: "ITSM Projects",
+                stat_scripts: "PowerShell Scripts",
+                stat_branches: "Branches Covered",
+                stat_langs: "Languages EN/ES",
+                exp_title: "Professional Experience",
+                exp_subtitle: "Career combining advanced technical support with autonomous tool development",
+                exp1_title: "Technical Support & Production Specialist",
+                exp1_1: "Advanced L1/L2 technical support for infrastructure across 21 national branches.",
+                exp1_2: "Autonomous development of Kore: predictive IT failure monitoring system (Python, FastAPI, SQLite, SMART disk analysis, anomaly detection).",
+                exp1_3: "DAST security portal construction with OWASP ZAP integration, JWT/RBAC, and automatic ticket generation — 42/42 tests passed.",
+                exp1_4: "HelpDesk Pro/SITIC implementation: full-stack ticket management system with React, Supabase realtime, RBAC, and multi-view interface.",
+                exp1_5: "HelpDesk Dashboard (~4,500 lines, Docker Compose, Leaflet.js, multi-level cache, coverage of 21 branches with geographic mapping).",
+                exp1_6: "Mass GLPI agent deployment via PowerShell and Bash scripts for Windows, Ubuntu/Debian, and RPM distributions.",
+                exp1_7: "Executive IT inventory report production for management (HTML/PDF editorial with Chart.js).",
+                exp2_title: "IT Support Technician",
+                exp2_1: "Equipment maintenance, user support, and incident resolution in manufacturing environment.",
+                exp2_2: "Technology asset management and coordination with external vendors.",
+                projects_title: "Featured Projects",
+                projects_subtitle: "ITSM tools built from scratch while maintaining daily support operations",
+                proj_kore_desc: "Predictive IT failure monitoring system with SMART disk analysis and anomaly detection. Dark industrial dashboard with real-time metrics.",
+                proj_dast_desc: "DAST security portal with OWASP ZAP integration, JWT/RBAC authentication, and automatic vulnerability ticket generation. 42/42 tests passed.",
+                proj_helpdesk_desc: "Full-stack ticket management system with React, Supabase realtime, RBAC, and multi-view interface. Real-time subscriptions for instant updates.",
+                proj_tomorrowdesk_desc: "~4,500 line dashboard with Docker Compose, Leaflet.js for geographic mapping, multi-level cache, and coverage of 21 branches. Executive HTML/PDF reports with Chart.js.",
+                proj_dominoes_desc: "Multiplayer Dominican domino game with Socket.io for real-time communication, AI for bot players, and mobile-first design. Smooth and responsive gameplay experience.",
+                proj_codequest_desc: "Educational JavaScript RPG with questions generated by Claude API, WebGL 3D effects, and level progression. Gamified interactive programming learning.",
+                project_cta: "View terminal demo",
+                tech_title: "Technical Stack",
+                tech_subtitle: "Technologies I master and use daily in operations and development",
+                tech_python: "FastAPI, scripting, analysis",
+                tech_js: "React, Node.js, WebGL",
+                tech_ps: "AD/M365 automation",
+                tech_bash: "Linux, GLPI deployment",
+                tech_sql: "SQLite, queries, reports",
+                tech_docker: "Compose, deployment",
+                tech_security: "JWT, RBAC, OWASP, DAST",
+                tech_itsm: "ITIL 4, GLPI, SLAs, COBIT",
+                scripts_title: "PowerShell Scripts",
+                scripts_subtitle: "Automation tools built for real-world IT operations",
+                script_onboarding_title: "User Onboarding",
+                script_onboarding_desc: "Automates new user creation in Microsoft 365: account setup, license assignment, and group membership via Microsoft Graph API.",
+                script_cleanup_title: "Disk Cleanup",
+                script_cleanup_desc: "Recovers disk space by clearing temp files, browser caches, Recycle Bin, and Windows Update artifacts — with a before/after report.",
+                script_network_title: "Network Diagnostics",
+                script_network_desc: "Runs ping, DNS resolution, port checks, and traceroute in a single script — outputs a structured report ready for escalation.",
+                script_password_title: "Password Reset Automation",
+                script_password_desc: "Automates password reset in Active Directory and M365 with identity verification, password history check, and automatic user notification.",
+                script_service_title: "Service Monitor & Restart",
+                script_service_desc: "Monitors critical Windows services in real-time, automatically restarts failed ones, sends email alerts, and generates incident logs.",
+                script_backup_title: "M365 Backup Audit",
+                script_backup_desc: "Audits backup status of Exchange mailboxes, OneDrive files, and SharePoint sites. Generates compliance reports and detects users without backup configured.",
+                script_cta: "View terminal demo",
+                terminal_title: "Live Demos",
+                terminal_subtitle: "Select a project or script above and watch it execute in real-time",
+                btn_run: "Run Demo",
+                btn_clear: "Clear",
+                sops_title: "SOPs & Runbooks",
+                sops_subtitle: "Every incident documented. Step-by-step procedures for consistency and speed.",
+                sop_1_title: "M365 Password Reset",
+                sop_1_desc: "Identity verification · Admin Center · PowerShell · MFA re-enrollment",
+                sop_2_title: "Printer Troubleshooting",
+                sop_2_desc: "Network printers · Spooler reset · Driver reinstall · Escalation tree",
+                sop_3_title: "VPN Connectivity",
+                sop_3_desc: "AnyConnect · GlobalProtect · FortiClient · Certificate errors · Auth failures",
+                certs_title: "Education & Certifications",
+                certs_subtitle: "Continuous education in IT, cybersecurity, and service management",
+                edu_title: "Education",
+                edu_degree: "Systems Engineering",
+                edu_uni: "Universidad Dominicana O&M, Santo Domingo, RD",
+                cert_now: "In Progress",
+                cert_completed: "Completed",
+                cert_itil_desc: "Self-study, goal 2026. Incident management, SLAs, and Change Management.",
+                cert_cyber: "Cybersecurity Fundamentals",
+                cert_bootcamp: "IT Support Technical Skills Bootcamp",
+                ach_title: "Key Achievements",
+                ach_subtitle: "Measurable impact on IT operations and proprietary tool development",
+                ach_1_title: "5+ Proprietary ITSM Tools",
+                ach_1_desc: "Designed and built 5+ ITSM tools while maintaining daily support operations.",
+                ach_2_title: "Predictive Monitoring",
+                ach_2_desc: "Implemented disk failure detection before they occur, reducing downtime.",
+                ach_3_title: "21 Branches Coverage",
+                ach_3_desc: "Built ticket management with geographic traceability for 21 branches from scratch.",
+                ach_4_title: "100% Tests Passed",
+                ach_4_desc: "42/42 automated tests passed in DAST security portal with OWASP ZAP.",
+                ach_5_title: "Full-Stack Autonomy",
+                ach_5_desc: "Ability to operate autonomously on full-stack architecture projects without direct supervision.",
+                contact_title: "Let's Connect",
+                contact_subtitle: "Interested in advanced technical support roles, ITSM development, or collaboration opportunities?"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            if (!currentDemo) {
+                document.getElementById('terminalTitle').textContent = lang === 'es'
+                    ? "Selecciona un proyecto o script para comenzar"
+                    : "Select a project or script to begin";
+                document.getElementById('terminalBody').innerHTML = `<div class="term-line" style="opacity:1"><span class="term-output">${lang === 'es' ? 'Haz clic en "Run Demo" despues de seleccionar un proyecto o script de arriba.' : 'Click "Run Demo" after selecting a project or script above.'}</span></div>`;
+            }
+
+            if (currentDemo) {
+                updateDescription(currentDemo, currentDemoType);
+            } else {
+                document.getElementById('descTitle').textContent = lang === 'es' ? "Selecciona un proyecto o script" : "Select a project or script";
+                document.getElementById('descText').textContent = lang === 'es'
+                    ? "Haz clic en cualquier proyecto o script de arriba para ver su descripción y ejecutar la demo en la terminal."
+                    : "Click any project or script above to see its description and run the demo in the terminal.";
+                document.getElementById('descFeatures').innerHTML = '';
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // SCROLL REVEAL
+        // ═══════════════════════════════════════════════════════════════
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ═══════════════════════════════════════════════════════════════
+        // DEMO DATA — PROJECTS
+        // ═══════════════════════════════════════════════════════════════
+        let currentDemo = null;
+        let currentDemoType = null;
+
+        const projectData = {
+            kore: {
+                name: "Kore — Predictive IT Monitoring",
+                nameEs: "Kore — Monitoreo Predictivo IT",
+                nameEn: "Kore — Predictive IT Monitoring",
+                descEs: "Sistema de monitoreo predictivo que analiza métricas SMART de discos duros en tiempo real para detectar fallas antes de que ocurran. Utiliza algoritmos de detección de anomalías sobre datos históricos de temperatura, sectores reasignados, errores de lectura/escritura y horas de operación. Dashboard oscuro industrial con gráficos de tendencia y alertas proactivas por email/SMS.",
+                descEn: "Predictive monitoring system that analyzes SMART disk metrics in real-time to detect failures before they occur. Uses anomaly detection algorithms on historical data of temperature, reallocated sectors, read/write errors, and operation hours. Dark industrial dashboard with trend charts and proactive email/SMS alerts.",
+                featuresEs: ["Análisis SMART de discos", "Detección de anomalías", "Dashboard oscuro industrial", "Alertas proactivas email/SMS", "Base de datos SQLite local", "API REST con FastAPI"],
+                featuresEn: ["SMART disk analysis", "Anomaly detection", "Dark industrial dashboard", "Proactive email/SMS alerts", "Local SQLite database", "FastAPI REST API"]
+            },
+            dast: {
+                name: "DAST Security Portal",
+                nameEs: "Portal de Seguridad DAST",
+                nameEn: "DAST Security Portal",
+                descEs: "Portal de seguridad con escaneo DAST (Dynamic Application Security Testing) integrado con OWASP ZAP. Autenticación JWT con control de acceso basado en roles (RBAC). Escanea aplicaciones web en busca de vulnerabilidades (XSS, SQL Injection, CSRF) y genera tickets automáticamente en el sistema de gestión. 42/42 pruebas de seguridad automatizadas aprobadas.",
+                descEn: "Security portal with DAST (Dynamic Application Security Testing) integrated with OWASP ZAP. JWT authentication with role-based access control (RBAC). Scans web applications for vulnerabilities (XSS, SQL Injection, CSRF) and automatically generates tickets in the management system. 42/42 automated security tests passed.",
+                featuresEs: ["Integración OWASP ZAP", "JWT + RBAC", "Escaneo DAST automático", "Generación automática de tickets", "Reportes de vulnerabilidades", "42/42 tests aprobados"],
+                featuresEn: ["OWASP ZAP integration", "JWT + RBAC", "Automatic DAST scanning", "Automatic ticket generation", "Vulnerability reports", "42/42 tests passed"]
+            },
+            helpdesk: {
+                name: "HelpDesk Pro / SITIC",
+                nameEs: "HelpDesk Pro / SITIC",
+                nameEn: "HelpDesk Pro / SITIC",
+                descEs: "Sistema completo de gestión de tickets IT construido con React y Supabase. Suscripciones en tiempo real permiten ver actualizaciones de tickets sin recargar la página. Sistema de roles y permisos (RBAC) con vistas diferenciadas para técnicos, supervisores y administradores. Incluye asignación automática de tickets, seguimiento de SLAs y notificaciones push.",
+                descEn: "Complete IT ticket management system built with React and Supabase. Real-time subscriptions allow viewing ticket updates without reloading the page. Role and permission system (RBAC) with differentiated views for technicians, supervisors, and administrators. Includes automatic ticket assignment, SLA tracking, and push notifications.",
+                featuresEs: ["React + Supabase realtime", "RBAC multi-vista", "Asignación automática de tickets", "Seguimiento de SLAs", "Notificaciones push", "Interfaz responsive"],
+                featuresEn: ["React + Supabase realtime", "Multi-view RBAC", "Automatic ticket assignment", "SLA tracking", "Push notifications", "Responsive interface"]
+            },
+            tomorrowdesk: {
+                name: "TomorrowDesk Dashboard",
+                nameEs: "TomorrowDesk Dashboard",
+                nameEn: "TomorrowDesk Dashboard",
+                descEs: "Dashboard ITSM de ~4,500 líneas de código con arquitectura Docker Compose. Integra Leaflet.js para mapeo geográfico de las 21 sucursales, mostrando estado de tickets, inventario y conectividad en tiempo real. Caché multinivel para optimizar rendimiento. Genera reportes ejecutivos en HTML/PDF con Chart.js para directivos.",
+                descEn: "ITSM dashboard of ~4,500 lines of code with Docker Compose architecture. Integrates Leaflet.js for geographic mapping of 21 branches, showing ticket status, inventory, and real-time connectivity. Multi-level cache for performance optimization. Generates executive HTML/PDF reports with Chart.js for management.",
+                featuresEs: ["~4,500 líneas de código", "Docker Compose", "Leaflet.js mapeo geográfico", "Caché multinivel", "21 sucursales", "Reportes HTML/PDF con Chart.js"],
+                featuresEn: ["~4,500 lines of code", "Docker Compose", "Leaflet.js geographic mapping", "Multi-level cache", "21 branches", "HTML/PDF reports with Chart.js"]
+            },
+            dominoes: {
+                name: "Dominoes RD",
+                nameEs: "Dominoes RD",
+                nameEn: "Dominoes RD",
+                descEs: "Juego multijugador de dominó dominicano en tiempo real. Utiliza Socket.io para comunicación bidireccional entre jugadores. Incluye IA para jugadores bot con diferentes niveles de dificultad. Diseño mobile-first que funciona perfectamente en smartphones y tablets. Sala de espera, chat en vivo, tabla de puntuaciones y sistema de torneos.",
+                descEn: "Real-time multiplayer Dominican domino game. Uses Socket.io for bidirectional communication between players. Includes AI for bot players with different difficulty levels. Mobile-first design that works perfectly on smartphones and tablets. Waiting room, live chat, scoreboard, and tournament system.",
+                featuresEs: ["Socket.io tiempo real", "IA para bots (3 niveles)", "Mobile-first responsive", "Sala de espera", "Chat en vivo", "Sistema de torneos"],
+                featuresEn: ["Socket.io real-time", "AI for bots (3 levels)", "Mobile-first responsive", "Waiting room", "Live chat", "Tournament system"]
+            },
+            codequest: {
+                name: "CodeQuest",
+                nameEs: "CodeQuest",
+                nameEn: "CodeQuest",
+                descEs: "RPG educativo de JavaScript que gamifica el aprendizaje de programación. Las preguntas se generan dinámicamente usando Claude API, adaptándose al nivel del jugador. Efectos visuales WebGL 3D para una experiencia inmersiva. Sistema de progresión con niveles, logros y leaderboard. Temas: variables, funciones, arrays, objetos, async/await, y más.",
+                descEn: "Educational JavaScript RPG that gamifies programming learning. Questions are dynamically generated using Claude API, adapting to the player's level. WebGL 3D visual effects for an immersive experience. Progression system with levels, achievements, and leaderboard. Topics: variables, functions, arrays, objects, async/await, and more.",
+                featuresEs: ["Preguntas por Claude API", "Efectos WebGL 3D", "Progresión por niveles", "Sistema de logros", "Leaderboard global", "Temas: JS moderno"],
+                featuresEn: ["Claude API questions", "WebGL 3D effects", "Level progression", "Achievement system", "Global leaderboard", "Topics: Modern JS"]
+            }
+        };
+
+        const scriptData = {
+            onboarding: {
+                name: "UserOnboarding.ps1",
+                nameEs: "Onboarding de Usuarios",
+                nameEn: "User Onboarding",
+                descEs: "Automatiza la creación de nuevos usuarios en Microsoft 365: configuración de cuenta, asignación de licencias y membresía de grupos vía Microsoft Graph API.",
+                descEn: "Automates new user creation in Microsoft 365: account setup, license assignment, and group membership via Microsoft Graph API.",
+                featuresEs: ["Creación de cuenta via Graph API", "Asignación automática de licencias", "Membresía de grupos", "Configuración de buzón Exchange", "Reporte CSV de usuarios creados"],
+                featuresEn: ["Account creation via Graph API", "Automatic license assignment", "Group membership", "Exchange mailbox setup", "CSV report of created users"]
+            },
+            cleanup: {
+                name: "DiskCleanup.ps1",
+                nameEs: "Limpieza de Disco",
+                nameEn: "Disk Cleanup",
+                descEs: "Recupera espacio en disco limpiando archivos temporales, cachés de navegador, Papelera de Reciclaje y artefactos de Windows Update — con reporte antes/después.",
+                descEn: "Recovers disk space by clearing temp files, browser caches, Recycle Bin, and Windows Update artifacts — with a before/after report.",
+                featuresEs: ["Limpieza de %TEMP% y Windows Temp", "Cache de navegadores", "Papelera de Reciclaje", "Logs de Windows Update", "Reporte antes/después"],
+                featuresEn: ["%TEMP% and Windows Temp cleanup", "Browser cache cleanup", "Recycle Bin emptying", "Windows Update logs", "Before/after report"]
+            },
+            network: {
+                name: "NetworkDiagnostic.ps1",
+                nameEs: "Diagnóstico de Red",
+                nameEn: "Network Diagnostics",
+                descEs: "Ejecuta ping, resolución DNS, verificación de puertos y traceroute en un solo script — genera un reporte estructurado listo para escalación.",
+                descEn: "Runs ping, DNS resolution, port checks, and traceroute in a single script — outputs a structured report ready for escalation.",
+                featuresEs: ["Ping y latencia", "Resolución DNS completa", "Escaneo de puertos TCP", "Traceroute con hops", "Reporte JSON estructurado"],
+                featuresEn: ["Ping and latency", "Full DNS resolution", "TCP port scanning", "Traceroute with hops", "Structured JSON report"]
+            },
+            password: {
+                name: "PasswordResetAutomation.ps1",
+                nameEs: "Reset de Password Automatizado",
+                nameEn: "Password Reset Automation",
+                descEs: "Automatiza el restablecimiento de contraseñas en Active Directory y M365 con verificación de identidad, historial de contraseñas y notificación automática al usuario.",
+                descEn: "Automates password reset in Active Directory and M365 with identity verification, password history check, and automatic user notification.",
+                featuresEs: ["Verificación de identidad", "Validación de historial (24)", "Password temporal seguro", "Force change next login", "Notificación email/SMS"],
+                featuresEn: ["Identity verification", "History validation (24)", "Secure temp password", "Force change next login", "Email/SMS notification"]
+            },
+            service: {
+                name: "ServiceMonitor.ps1",
+                nameEs: "Monitoreo de Servicios",
+                nameEn: "Service Monitor & Restart",
+                descEs: "Monitorea servicios críticos de Windows en tiempo real, reinicia automáticamente los que fallen, envía alertas por email y genera logs de incidentes.",
+                descEn: "Monitors critical Windows services in real-time, automatically restarts failed ones, sends email alerts, and generates incident logs.",
+                featuresEs: ["Monitoreo cada 30 segundos", "Auto-reinicio con backoff", "Alertas SMTP a NOC", "Logs de incidentes", "Lista de servicios configurable"],
+                featuresEn: ["Monitoring every 30 seconds", "Auto-restart with backoff", "SMTP alerts to NOC", "Incident logs", "Configurable service list"]
+            },
+            backup: {
+                name: "M365BackupAudit.ps1",
+                nameEs: "Auditoría de Backup M365",
+                nameEn: "M365 Backup Audit",
+                descEs: "Audita el estado de respaldo de buzones de Exchange, archivos de OneDrive y sitios de SharePoint. Genera reporte de cumplimiento y detecta usuarios sin backup configurado.",
+                descEn: "Audits backup status of Exchange mailboxes, OneDrive files, and SharePoint sites. Generates compliance reports and detects users without backup configured.",
+                featuresEs: ["Auditoría de buzones Exchange", "Estado de OneDrive sync", "Versionado de SharePoint", "Usuarios sin backup", "Reporte Excel de cumplimiento"],
+                featuresEn: ["Exchange mailbox audit", "OneDrive sync status", "SharePoint versioning", "Users without backup", "Excel compliance report"]
+            }
+        };
+
+        function selectProject(projectKey) {
+            currentDemo = projectKey;
+            currentDemoType = 'project';
+
+            document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.script-card').forEach(card => card.classList.remove('active'));
+            document.getElementById('proj-' + projectKey).classList.add('active');
+
+            updateDescription(projectKey, 'project');
+            clearTerminal();
+
+            const data = projectData[projectKey];
+            document.getElementById('terminalTitle').textContent = data.name + " — Demo";
+        }
+
+        function selectScript(scriptKey) {
+            currentDemo = scriptKey;
+            currentDemoType = 'script';
+
+            document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.script-card').forEach(card => card.classList.remove('active'));
+            document.getElementById('card-' + scriptKey).classList.add('active');
+
+            updateDescription(scriptKey, 'script');
+            clearTerminal();
+
+            const data = scriptData[scriptKey];
+            document.getElementById('terminalTitle').textContent = data.name + " — PowerShell 7.4";
+        }
+
+        function updateDescription(key, type) {
+            const data = type === 'project' ? projectData[key] : scriptData[key];
+            const isEs = currentLang === 'es';
+
+            document.getElementById('descTitle').textContent = (isEs ? data.nameEs : data.nameEn) + " — " + data.name;
+            document.getElementById('descText').textContent = isEs ? data.descEs : data.descEn;
+
+            const features = isEs ? data.featuresEs : data.featuresEn;
+            document.getElementById('descFeatures').innerHTML = features.map(f =>
+                `<span class="tag primary">${f}</span>`
+            ).join('');
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // TERMINAL ANIMATIONS — ALL PROJECTS
+        // ═══════════════════════════════════════════════════════════════
+        const projectDemos = {
+            kore: [
+                { text: 'PS C:\\Kore> python kore.py --monitor --dashboard', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  KORE — PREDICTIVE IT MONITORING SYSTEM', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Loading configuration from config/kore.yaml...', type: 'info', delay: 300 },
+                { text: '  [✓] Config loaded: 21 branches configured', type: 'success', delay: 300 },
+                { text: '  [i] Initializing SQLite database...', type: 'info', delay: 200 },
+                { text: '  [✓] Database connected: kore_metrics.db (3.2 MB)', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Starting SMART disk analysis service...', type: 'info', delay: 300 },
+                { text: '  [✓] SMART service started on port 8080', type: 'success', delay: 300 },
+                { text: '  [i] Scanning 47 disks across 21 branches...', type: 'info', delay: 400 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Branch: SDO-Central (192.168.1.10)', type: 'metric', delay: 300 },
+                { text: '  [✓] Disk /dev/sda: HEALTHY (Temp: 38°C, Realloc: 0)', type: 'success', delay: 200 },
+                { text: '  [✓] Disk /dev/sdb: HEALTHY (Temp: 41°C, Realloc: 0)', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: '  [i] Branch: SDO-Norte (192.168.2.15)', type: 'metric', delay: 300 },
+                { text: '  [✓] Disk /dev/sda: HEALTHY (Temp: 36°C, Realloc: 0)', type: 'success', delay: 200 },
+                { text: '  [!] Disk /dev/sdb: WARNING (Temp: 52°C, Realloc: 3)', type: 'warn', delay: 300 },
+                { text: '  [i]   → Anomaly score: 0.73 (threshold: 0.70)', type: 'metric', delay: 200 },
+                { text: '  [i]   → Predicted failure: 14 days', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Branch: Santiago-Este (192.168.5.22)', type: 'metric', delay: 300 },
+                { text: '  [✓] Disk /dev/sda: HEALTHY (Temp: 39°C, Realloc: 0)', type: 'success', delay: 200 },
+                { text: '  [✓] Disk /dev/sdb: HEALTHY (Temp: 40°C, Realloc: 0)', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Anomaly detection engine running...', type: 'info', delay: 300 },
+                { text: '  [i] ML model: isolation_forest_v2.pkl loaded', type: 'info', delay: 300 },
+                { text: '  [i] Baseline: 30 days of historical data', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  ALERTS SUMMARY', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [!] WARNING: 1 disk approaching failure (SDO-Norte)', type: 'warn', delay: 300 },
+                { text: '  [i] INFO: 46 disks healthy', type: 'info', delay: 200 },
+                { text: '  [i] INFO: 0 critical alerts', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Sending alert email to: it-ops@company.com...', type: 'info', delay: 300 },
+                { text: '  [✓] Email alert sent successfully', type: 'success', delay: 300 },
+                { text: '  [i] SMS alert sent to: +1-809-***-4521', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Dashboard available at: http://localhost:8080', type: 'info', delay: 200 },
+                { text: '  [i] API docs: http://localhost:8080/docs', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\Kore> _', type: 'cmd', delay: 0 }
+            ],
+            dast: [
+                { text: 'PS C:\\DAST> python dast_portal.py --scan-target https://app.company.com', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  DAST SECURITY PORTAL — OWASP ZAP INTEGRATION', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Authenticating with JWT token...', type: 'info', delay: 400 },
+                { text: '  [✓] Token valid — Role: security_admin', type: 'success', delay: 300 },
+                { text: '  [i] RBAC check: SCAN_PERMISSION granted', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Initializing OWASP ZAP scanner...', type: 'info', delay: 300 },
+                { text: '  [✓] ZAP proxy connected: localhost:8081', type: 'success', delay: 300 },
+                { text: '  [i] Spider scan starting...', type: 'info', delay: 300 },
+                { text: '  [✓] Spider complete: 142 URLs discovered', type: 'success', delay: 400 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Running active scan (42 test rules)...', type: 'info', delay: 300 },
+                { text: '  [i] Test 1/42: SQL Injection — PASS', type: 'success', delay: 200 },
+                { text: '  [i] Test 2/42: XSS Reflected — PASS', type: 'success', delay: 150 },
+                { text: '  [i] Test 3/42: XSS Stored — PASS', type: 'success', delay: 150 },
+                { text: '  [i] Test 4/42: CSRF Token — PASS', type: 'success', delay: 150 },
+                { text: '  [i] Test 5/42: Directory Traversal — PASS', type: 'success', delay: 150 },
+                { text: '  ...', type: 'output', delay: 200 },
+                { text: '  [i] Test 40/42: XXE Injection — PASS', type: 'success', delay: 150 },
+                { text: '  [i] Test 41/42: Open Redirect — PASS', type: 'success', delay: 150 },
+                { text: '  [i] Test 42/42: Security Headers — PASS', type: 'success', delay: 150 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SCAN RESULTS', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Total tests: 42/42 PASSED', type: 'success', delay: 300 },
+                { text: '  [✓] Critical vulnerabilities: 0', type: 'success', delay: 200 },
+                { text: '  [✓] High risk: 0', type: 'success', delay: 200 },
+                { text: '  [✓] Medium risk: 0', type: 'success', delay: 200 },
+                { text: '  [✓] Low risk: 0', type: 'success', delay: 200 },
+                { text: '  [i] Informational: 3 (missing headers)', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Generating tickets for informational findings...', type: 'info', delay: 300 },
+                { text: '  [✓] Ticket SEC-2025-001 created: Missing X-Frame-Options', type: 'success', delay: 300 },
+                { text: '  [✓] Ticket SEC-2025-002 created: Missing CSP header', type: 'success', delay: 200 },
+                { text: '  [✓] Ticket SEC-2025-003 created: Missing HSTS header', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Report saved: .\Reports\DAST_Scan_20250701_143022.html', type: 'info', delay: 300 },
+                { text: '  [i] Scan duration: 4m 32s', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\DAST> _', type: 'cmd', delay: 0 }
+            ],
+            helpdesk: [
+                { text: 'PS C:\\HelpDesk> npm run dev', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  HELPDESK PRO / SITIC — FULL-STACK TICKET SYSTEM', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Starting Vite development server...', type: 'info', delay: 400 },
+                { text: '  [✓] Vite server ready on http://localhost:5173', type: 'success', delay: 300 },
+                { text: '  [i] Connecting to Supabase...', type: 'info', delay: 300 },
+                { text: '  [✓] Supabase connected: project-ref.supabase.co', type: 'success', delay: 300 },
+                { text: '  [i] Realtime subscriptions active', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Loading RBAC configuration...', type: 'info', delay: 300 },
+                { text: '  [✓] Roles loaded: admin, supervisor, technician, viewer', type: 'success', delay: 300 },
+                { text: '  [✓] Permissions matrix: 24 rules loaded', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Initializing ticket queue...', type: 'info', delay: 300 },
+                { text: '  [i] Active tickets: 47', type: 'metric', delay: 200 },
+                { text: '  [i] Pending SLA: 12 (within threshold)', type: 'metric', delay: 200 },
+                { text: '  [i] Overdue SLA: 2 (escalated)', type: 'warn', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Real-time event received:', type: 'info', delay: 300 },
+                { text: '  [i]   Type: TICKET_CREATED', type: 'metric', delay: 200 },
+                { text: '  [i]   ID: TK-2025-07421', type: 'metric', delay: 200 },
+                { text: '  [i]   Priority: P2 — High', type: 'metric', delay: 200 },
+                { text: '  [i]   Category: Network', type: 'metric', delay: 200 },
+                { text: '  [i]   Branch: SDO-Norte', type: 'metric', delay: 200 },
+                { text: '  [✓] Auto-assigned to: technician.juan@company.com', type: 'success', delay: 300 },
+                { text: '  [✓] Notification sent via push + email', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Real-time event received:', type: 'info', delay: 300 },
+                { text: '  [i]   Type: TICKET_STATUS_CHANGED', type: 'metric', delay: 200 },
+                { text: '  [i]   ID: TK-2025-07418', type: 'metric', delay: 200 },
+                { text: '  [i]   Status: In Progress → Resolved', type: 'metric', delay: 200 },
+                { text: '  [i]   Time to resolution: 18m 32s', type: 'metric', delay: 200 },
+                { text: '  [✓] SLA met: Target 30m', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SYSTEM STATUS', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Frontend: React 19 + Vite (running)', type: 'success', delay: 200 },
+                { text: '  [✓] Backend: Supabase Realtime (connected)', type: 'success', delay: 200 },
+                { text: '  [✓] Auth: JWT + RBAC (active)', type: 'success', delay: 200 },
+                { text: '  [✓] WebSocket: 12 clients connected', type: 'success', delay: 200 },
+                { text: '  [i] Dashboard: http://localhost:5173/dashboard', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\HelpDesk> _', type: 'cmd', delay: 0 }
+            ],
+            tomorrowdesk: [
+                { text: 'PS C:\\TomorrowDesk> docker-compose up --build', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  TOMORROWDESK — ITSM DASHBOARD (4,500+ LOC)', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Building Docker images...', type: 'info', delay: 400 },
+                { text: '  [✓] frontend built: react-vite:latest (142 MB)', type: 'success', delay: 300 },
+                { text: '  [✓] backend built: node-api:latest (89 MB)', type: 'success', delay: 300 },
+                { text: '  [✓] database built: mongo:latest (231 MB)', type: 'success', delay: 300 },
+                { text: '  [✓] redis built: redis:alpine (28 MB)', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Starting containers...', type: 'info', delay: 300 },
+                { text: '  [✓] Container tomorrowdesk-frontend: Running (port 3000)', type: 'success', delay: 300 },
+                { text: '  [✓] Container tomorrowdesk-backend: Running (port 3001)', type: 'success', delay: 200 },
+                { text: '  [✓] Container tomorrowdesk-mongo: Running (port 27017)', type: 'success', delay: 200 },
+                { text: '  [✓] Container tomorrowdesk-redis: Running (port 6379)', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Initializing Leaflet.js map...', type: 'info', delay: 300 },
+                { text: '  [✓] Map loaded: OpenStreetMap tiles', type: 'success', delay: 300 },
+                { text: '  [i] Loading 21 branch markers...', type: 'info', delay: 300 },
+                { text: '  [✓] Marker: SDO-Central (18.4861, -69.9312) — 3 tickets', type: 'success', delay: 200 },
+                { text: '  [✓] Marker: SDO-Norte (18.5081, -69.9100) — 7 tickets', type: 'success', delay: 150 },
+                { text: '  [✓] Marker: Santiago-Este (19.4500, -70.7000) — 2 tickets', type: 'success', delay: 150 },
+                { text: '  [✓] Marker: La Romana (18.4274, -68.9728) — 1 ticket', type: 'success', delay: 150 },
+                { text: '  ... (17 more branches loaded)', type: 'output', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Multi-level cache initialized...', type: 'info', delay: 300 },
+                { text: '  [✓] L1 cache (Redis): 47 keys loaded', type: 'success', delay: 200 },
+                { text: '  [✓] L2 cache (In-memory): 12 queries cached', type: 'success', delay: 200 },
+                { text: '  [i] Cache hit ratio: 87.3%', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Generating executive report...', type: 'info', delay: 300 },
+                { text: '  [✓] HTML report: .\Reports\Executive_20250701.html', type: 'success', delay: 300 },
+                { text: '  [✓] PDF report: .\Reports\Executive_20250701.pdf (2.4 MB)', type: 'success', delay: 200 },
+                { text: '  [i] Charts rendered: 12 (Chart.js)', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  DASHBOARD URLS', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Main Dashboard: http://localhost:3000', type: 'info', delay: 200 },
+                { text: '  [i] API Docs: http://localhost:3001/api/docs', type: 'info', delay: 200 },
+                { text: '  [i] MongoDB: mongodb://localhost:27017', type: 'info', delay: 200 },
+                { text: '  [i] Redis: redis://localhost:6379', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\TomorrowDesk> _', type: 'cmd', delay: 0 }
+            ],
+            dominoes: [
+                { text: 'PS C:\\Dominoes> npm start', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  DOMINOES RD — MULTIPLAYER DOMINO GAME', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Starting Node.js server...', type: 'info', delay: 400 },
+                { text: '  [✓] Server listening on port 3000', type: 'success', delay: 300 },
+                { text: '  [✓] Socket.io initialized (WebSocket transport)', type: 'success', delay: 300 },
+                { text: '  [i] Redis adapter: connected for multi-server sync', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Loading AI bot engine...', type: 'info', delay: 300 },
+                { text: '  [✓] Bot engine loaded: 3 difficulty levels', type: 'success', delay: 300 },
+                { text: '  [i]   Level 1: Novice (random strategy)', type: 'metric', delay: 150 },
+                { text: '  [i]   Level 2: Intermediate (heuristic scoring)', type: 'metric', delay: 150 },
+                { text: '  [i]   Level 3: Expert (Monte Carlo simulation)', type: 'metric', delay: 150 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Player connected: user_ana (WebSocket)', type: 'info', delay: 300 },
+                { text: '  [i] Player connected: user_carlos (WebSocket)', type: 'info', delay: 200 },
+                { text: '  [i] Player connected: bot_expert (AI)', type: 'info', delay: 200 },
+                { text: '  [i] Player connected: bot_novice (AI)', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Match started: Room #DR-2025-001', type: 'info', delay: 300 },
+                { text: '  [i] Game mode: Classic Dominican (2v2)', type: 'metric', delay: 200 },
+                { text: '  [i] Tiles dealt: 7 per player', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Turn 1: user_ana plays [6|6]', type: 'info', delay: 300 },
+                { text: '  [i] Turn 2: bot_expert plays [6|4]', type: 'info', delay: 300 },
+                { text: '  [i] Turn 3: user_carlos plays [4|3]', type: 'info', delay: 300 },
+                { text: '  [i] Turn 4: bot_novice draws from pile', type: 'info', delay: 300 },
+                { text: '  [i] Turn 5: bot_novice plays [3|1]', type: 'info', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Chat message: user_ana: "Buena jugada!"', type: 'info', delay: 300 },
+                { text: '  [i] Chat message: user_carlos: "Vamos equipo"', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Turn 12: user_ana plays last tile [2|0]', type: 'info', delay: 300 },
+                { text: '  [✓] user_ana & user_carlos WIN the round!', type: 'success', delay: 400 },
+                { text: '  [i] Score: Team A (user_ana + user_carlos): 67 pts', type: 'metric', delay: 200 },
+                { text: '  [i] Score: Team B (bots): 23 pts', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SERVER STATS', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Active rooms: 14', type: 'metric', delay: 100 },
+                { text: '  [i] Connected players: 37', type: 'metric', delay: 100 },
+                { text: '  [i] AI bots active: 12', type: 'metric', delay: 100 },
+                { text: '  [i] Games completed today: 156', type: 'metric', delay: 100 },
+                { text: '  [i] Mobile users: 68%', type: 'metric', delay: 100 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\Dominoes> _', type: 'cmd', delay: 0 }
+            ],
+            codequest: [
+                { text: 'PS C:\\CodeQuest> npm run dev', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  CODEQUEST — EDUCATIONAL JS RPG', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Starting Vite development server...', type: 'info', delay: 400 },
+                { text: '  [✓] Server ready: http://localhost:5173', type: 'success', delay: 300 },
+                { text: '  [i] Initializing WebGL 3D renderer...', type: 'info', delay: 300 },
+                { text: '  [✓] WebGL context created (Three.js r160)', type: 'success', delay: 300 },
+                { text: '  [✓] GPU: NVIDIA GTX 1660 — Accelerated', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Loading Claude API client...', type: 'info', delay: 300 },
+                { text: '  [✓] Claude API connected (model: claude-3-sonnet)', type: 'success', delay: 300 },
+                { text: '  [i] Question bank: 500+ JS questions cached', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] New player session: player_alex', type: 'info', delay: 300 },
+                { text: '  [i] Level: 1 (Novice Coder)', type: 'metric', delay: 200 },
+                { text: '  [i] XP: 0 / 100', type: 'metric', delay: 200 },
+                { text: '  [i] Topic: Variables & Data Types', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Generating question via Claude API...', type: 'info', delay: 400 },
+                { text: '  [✓] Question generated (difficulty: easy)', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [Q] What is the output of: console.log(typeof [])?', type: 'info', delay: 300 },
+                { text: '  [A] A) "array"', type: 'metric', delay: 200 },
+                { text: '  [A] B) "object"', type: 'metric', delay: 150 },
+                { text: '  [A] C) "undefined"', type: 'metric', delay: 150 },
+                { text: '  [A] D) "list"', type: 'metric', delay: 150 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '  [i] Player selected: B) "object"', type: 'info', delay: 300 },
+                { text: '  [✓] CORRECT! +25 XP', type: 'success', delay: 400 },
+                { text: '  [i] Explanation: Arrays are objects in JavaScript.', type: 'info', delay: 200 },
+                { text: '  [i] XP: 25 / 100 → Level progress: 25%', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] WebGL effect triggered: Correct answer burst', type: 'info', delay: 300 },
+                { text: '  [i] Particles: 128 rendered at 60 FPS', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Generating next question...', type: 'info', delay: 300 },
+                { text: '  [✓] Question generated (difficulty: easy)', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  PLAYER STATS', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Total players online: 23', type: 'metric', delay: 100 },
+                { text: '  [i] Questions answered today: 1,247', type: 'metric', delay: 100 },
+                { text: '  [i] Average accuracy: 73.4%', type: 'metric', delay: 100 },
+                { text: '  [i] Top topic: Async/Await (34% of questions)', type: 'metric', delay: 100 },
+                { text: '  [i] Leaderboard: player_maria (Level 42, 8,450 XP)', type: 'metric', delay: 100 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\\CodeQuest> _', type: 'cmd', delay: 0 }
+            ]
+        };
+
+        // ═══════════════════════════════════════════════════════════════
+        // TERMINAL ANIMATIONS — ALL SCRIPTS
+        // ═══════════════════════════════════════════════════════════════
+        const scriptDemos = {
+            onboarding: [
+                { text: 'PS C:\Scripts> .\UserOnboarding.ps1 -UserName "juan.perez" -Department "IT" -Manager "ana.garcia"', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  USER ONBOARDING AUTOMATION', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Connecting to Microsoft Graph API...', type: 'info', delay: 400 },
+                { text: '  [✓] Authenticated as: admin@company.onmicrosoft.com', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Creating user account...', type: 'info', delay: 300 },
+                { text: '  [✓] User created: juan.perez@company.com', type: 'success', delay: 400 },
+                { text: '  [✓] Display Name: Juan Perez', type: 'success', delay: 200 },
+                { text: '  [✓] User Principal Name: juan.perez@company.com', type: 'success', delay: 200 },
+                { text: '  [✓] Object ID: a1b2c3d4-e5f6-7890-abcd-ef1234567890', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Assigning licenses...', type: 'info', delay: 300 },
+                { text: '  [✓] Microsoft 365 E3 assigned', type: 'success', delay: 300 },
+                { text: '  [✓] Exchange Online (Plan 2) assigned', type: 'success', delay: 200 },
+                { text: '  [✓] Teams enabled', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Adding to security groups...', type: 'info', delay: 300 },
+                { text: '  [✓] Added to: All-Company-Users', type: 'success', delay: 300 },
+                { text: '  [✓] Added to: IT-Department', type: 'success', delay: 200 },
+                { text: '  [✓] Added to: VPN-Access-Group', type: 'success', delay: 200 },
+                { text: '  [✓] Added to: SharePoint-IT-Site', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Configuring Exchange mailbox...', type: 'info', delay: 300 },
+                { text: '  [✓] Mailbox created: 50 GB quota', type: 'success', delay: 300 },
+                { text: '  [✓] Retention policy: 7-year default', type: 'success', delay: 200 },
+                { text: '  [✓] Calendar sharing enabled', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Generating welcome email...', type: 'info', delay: 300 },
+                { text: '  [✓] Welcome email sent to juan.perez@company.com', type: 'success', delay: 400 },
+                { text: '  [✓] Credentials sent to manager: ana.garcia@company.com', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SUMMARY', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Account created successfully', type: 'success', delay: 100 },
+                { text: '  [✓] 1 license assigned (E3)', type: 'success', delay: 100 },
+                { text: '  [✓] 4 groups joined', type: 'success', delay: 100 },
+                { text: '  [✓] Mailbox configured', type: 'success', delay: 100 },
+                { text: '  [✓] Notifications sent', type: 'success', delay: 100 },
+                { text: '  [i] Total execution time: 1.8 seconds', type: 'info', delay: 200 },
+                { text: '  [i] Report saved: .\Reports\Onboarding_20250701_143022.csv', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ],
+            cleanup: [
+                { text: 'PS C:\Scripts> .\DiskCleanup.ps1 -Verbose -ReportPath ".\Reports"', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  DISK CLEANUP AUTOMATION', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Analyzing disk space before cleanup...', type: 'info', delay: 400 },
+                { text: '  [i] Drive C: 45.2 GB free / 256 GB total', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Scanning Windows Temp files...', type: 'info', delay: 300 },
+                { text: '  [✓] Found: 1,247 files (3.8 GB)', type: 'success', delay: 300 },
+                { text: '  [✓] Deleted: 1,245 files (3.8 GB)', type: 'success', delay: 200 },
+                { text: '  [!] Skipped: 2 files (in use by system)', type: 'warn', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Cleaning browser caches...', type: 'info', delay: 300 },
+                { text: '  [✓] Chrome cache: 1.2 GB cleared', type: 'success', delay: 300 },
+                { text: '  [✓] Edge cache: 856 MB cleared', type: 'success', delay: 200 },
+                { text: '  [✓] Firefox cache: 423 MB cleared', type: 'success', delay: 200 },
+                { text: '  [✓] Total browser cache: 2.5 GB freed', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Emptying Recycle Bin...', type: 'info', delay: 300 },
+                { text: '  [✓] 342 items removed (1.1 GB)', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Cleaning Windows Update artifacts...', type: 'info', delay: 300 },
+                { text: '  [✓] SoftwareDistribution\Download: 4.2 GB cleared', type: 'success', delay: 300 },
+                { text: '  [✓] Windows.old check: not present', type: 'success', delay: 200 },
+                { text: '  [✓] Update logs: 156 MB cleared', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Cleaning Prefetch files...', type: 'info', delay: 300 },
+                { text: '  [✓] 89 outdated prefetch files removed (45 MB)', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Cleaning Event Logs (optional)...', type: 'info', delay: 300 },
+                { text: '  [✓] Application logs archived: 234 MB', type: 'success', delay: 300 },
+                { text: '  [✓] System logs archived: 189 MB', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  BEFORE / AFTER REPORT', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Free space BEFORE: 45.2 GB', type: 'metric', delay: 100 },
+                { text: '  [i] Free space AFTER:  56.8 GB', type: 'metric', delay: 100 },
+                { text: '  [✓] Total space recovered: 11.6 GB', type: 'success', delay: 200 },
+                { text: '  [i] Execution time: 12.4 seconds', type: 'info', delay: 200 },
+                { text: '  [i] Report saved: .\Reports\DiskCleanup_20250701_143035.html', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ],
+            network: [
+                { text: 'PS C:\Scripts> .\NetworkDiagnostic.ps1 -Target "google.com" -SaveReport', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  PING TEST', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Host Reachable : google.com', type: 'success', delay: 400 },
+                { text: '  [i] Packets Sent : 4', type: 'metric', delay: 100 },
+                { text: '  [i] Packets Received : 4', type: 'metric', delay: 100 },
+                { text: '  [i] Packet Loss : 0 %', type: 'metric', delay: 100 },
+                { text: '  [i] Min Latency : 12 ms', type: 'metric', delay: 100 },
+                { text: '  [i] Avg Latency : 18.5 ms', type: 'metric', delay: 100 },
+                { text: '  [i] Max Latency : 24 ms', type: 'metric', delay: 100 },
+                { text: '  [✓] Connection Quality : Good', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  DNS RESOLUTION', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] A Record : 142.250.80.46 (TTL: 300s)', type: 'success', delay: 400 },
+                { text: '  [✓] A Record : 142.250.80.78 (TTL: 300s)', type: 'success', delay: 200 },
+                { text: '  [✓] Reverse DNS : nuq04s49-in-f14.1e100.net', type: 'success', delay: 200 },
+                { text: '  [i] DNS Server : 8.8.8.8, 8.8.4.4', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  TCP PORT SCAN', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] HTTP (80) : OPEN — 142.250.80.46:80', type: 'success', delay: 300 },
+                { text: '  [✓] HTTPS (443) : OPEN — 142.250.80.46:443', type: 'success', delay: 200 },
+                { text: '  [✗] SSH (22) : Closed / Filtered', type: 'error', delay: 200 },
+                { text: '  [✗] RDP (3389) : Closed / Filtered', type: 'error', delay: 200 },
+                { text: '  [✗] HTTP-Alt (8080) : Closed / Filtered', type: 'error', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: '  [i] Summary: 2 open, 3 closed/filtered', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  TRACEROUTE', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Hop 1 : 192.168.1.1 — 2ms', type: 'success', delay: 300 },
+                { text: '  [✓] Hop 2 : 10.0.0.1 — 8ms', type: 'success', delay: 200 },
+                { text: '  [✓] Hop 3 : isp-gw.example.com — 12ms', type: 'success', delay: 200 },
+                { text: '  [✓] Hop 4 : core-router.isp.net — 15ms', type: 'success', delay: 200 },
+                { text: '  [!] Hop 5 : * * * (timeout)', type: 'warn', delay: 200 },
+                { text: '  [✓] Hop 6 : 142.250.80.46 — 18ms', type: 'success', delay: 300 },
+                { text: '  [✓] Traceroute Complete : 6 hops traced', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SAVING REPORT', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [✓] Report Saved : .\NetworkReports\NetworkReport_google.com_20250701_143022.json', type: 'success', delay: 400 },
+                { text: '  [i] File Size : 4.2 KB', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SUMMARY', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Target : google.com', type: 'info', delay: 100 },
+                { text: '  [✓] Ping : PASS', type: 'success', delay: 100 },
+                { text: '  [✓] DNS : PASS', type: 'success', delay: 100 },
+                { text: '  [✓] Ports : 2/5 open', type: 'success', delay: 100 },
+                { text: '  [✓] Traceroute : 6 hops', type: 'success', delay: 100 },
+                { text: '  [✓] Tests Passed : 4/4', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: '  [i] Network diagnostic complete.', type: 'info', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ],
+            password: [
+                { text: 'PS C:\Scripts> .\PasswordResetAutomation.ps1 -UserName "juan.perez" -VerifyIdentity', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  PASSWORD RESET AUTOMATION', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Starting password reset for: juan.perez@company.com', type: 'info', delay: 400 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 1: Identity Verification', type: 'info', delay: 300 },
+                { text: '  [i] Querying HR database...', type: 'info', delay: 300 },
+                { text: '  [✓] Employee ID verified: EMP-4521', type: 'success', delay: 300 },
+                { text: '  [✓] Department match: IT (verified)', type: 'success', delay: 200 },
+                { text: '  [✓] Manager confirmed: ana.garcia@company.com', type: 'success', delay: 200 },
+                { text: '  [✓] Last 4 SSN match: ****4521', type: 'success', delay: 200 },
+                { text: '  [✓] Identity verification: PASSED', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 2: Password History Check', type: 'info', delay: 300 },
+                { text: '  [i] Checking last 24 passwords...', type: 'info', delay: 300 },
+                { text: '  [✓] No recent password reuse detected', type: 'success', delay: 300 },
+                { text: '  [✓] Password complexity requirements: met', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 3: Generating Secure Password', type: 'info', delay: 300 },
+                { text: '  [i] Using cryptographically secure RNG...', type: 'info', delay: 300 },
+                { text: '  [✓] Temporary password generated: Xk9#mP2$vLqR', type: 'success', delay: 400 },
+                { text: '  [i] Entropy: 82 bits (very strong)', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 4: Resetting in Active Directory', type: 'info', delay: 300 },
+                { text: '  [✓] AD password reset: SUCCESS', type: 'success', delay: 300 },
+                { text: '  [✓] Force change at next logon: ENABLED', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 5: Syncing to Microsoft 365', type: 'info', delay: 300 },
+                { text: '  [i] Waiting for Azure AD Connect sync...', type: 'info', delay: 400 },
+                { text: '  [✓] Azure AD sync completed (delta)', type: 'success', delay: 300 },
+                { text: '  [✓] M365 password updated', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Step 6: User Notification', type: 'info', delay: 300 },
+                { text: '  [✓] Email sent to: juan.perez@company.com', type: 'success', delay: 300 },
+                { text: '  [✓] SMS sent to: +1-809-***-4521', type: 'success', delay: 200 },
+                { text: '  [✓] Manager notified: ana.garcia@company.com', type: 'success', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  AUDIT LOG', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Ticket ID: INC-2025-07421', type: 'info', delay: 100 },
+                { text: '  [i] Reset by: admin@company.com', type: 'info', delay: 100 },
+                { text: '  [i] Timestamp: 2025-07-01 14:30:22 UTC', type: 'info', delay: 100 },
+                { text: '  [i] Method: Automated (PowerShell)', type: 'info', delay: 100 },
+                { text: '  [i] Log saved: .\AuditLogs\PasswordReset_20250701.log', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: '  [✓] Password reset completed successfully.', type: 'success', delay: 200 },
+                { text: '  [i] User must change password at next login.', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ],
+            service: [
+                { text: 'PS C:\Scripts> .\ServiceMonitor.ps1 -Config ".\config.json" -Monitor', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  SERVICE MONITOR & AUTO-RESTART', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Loading configuration from .\config.json...', type: 'info', delay: 400 },
+                { text: '  [✓] Config loaded: 6 services to monitor', type: 'success', delay: 300 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Services configured:', type: 'info', delay: 200 },
+                { text: '  [i]   - Spooler (Print Spooler)', type: 'metric', delay: 100 },
+                { text: '  [i]   - BITS (Background Intelligent Transfer)', type: 'metric', delay: 100 },
+                { text: '  [i]   - WinRM (Windows Remote Management)', type: 'metric', delay: 100 },
+                { text: '  [i]   - SQLSERVERAGENT', type: 'metric', delay: 100 },
+                { text: '  [i]   - W3SVC (World Wide Web Publishing)', type: 'metric', delay: 100 },
+                { text: '  [i]   - RemoteDesktopServices', type: 'metric', delay: 100 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Initial status check...', type: 'info', delay: 300 },
+                { text: '  [✓] Spooler: Running', type: 'success', delay: 200 },
+                { text: '  [✓] BITS: Running', type: 'success', delay: 100 },
+                { text: '  [✓] WinRM: Running', type: 'success', delay: 100 },
+                { text: '  [✓] SQLSERVERAGENT: Running', type: 'success', delay: 100 },
+                { text: '  [✓] W3SVC: Running', type: 'success', delay: 100 },
+                { text: '  [✓] RemoteDesktopServices: Running', type: 'success', delay: 100 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Starting continuous monitoring (interval: 30s)...', type: 'info', delay: 400 },
+                { text: '  [i] Press Ctrl+C to stop', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '  [i] [14:30:30] All services healthy', type: 'info', delay: 500 },
+                { text: '  [i] [14:31:00] All services healthy', type: 'info', delay: 500 },
+                { text: '  [!] [14:31:30] ALERT: Spooler service STOPPED', type: 'warn', delay: 500 },
+                { text: '  [i] Attempting restart (attempt 1/3)...', type: 'info', delay: 300 },
+                { text: '  [✓] Spooler restarted successfully', type: 'success', delay: 400 },
+                { text: '  [i] Sending alert email to noc@company.com...', type: 'info', delay: 300 },
+                { text: '  [✓] Alert email sent (SMTP: mail.company.com)', type: 'success', delay: 300 },
+                { text: '  [i] Incident logged: INC-SVC-20250701-001', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '  [i] [14:32:00] All services healthy', type: 'info', delay: 500 },
+                { text: '  [i] [14:32:30] All services healthy', type: 'info', delay: 500 },
+                { text: '  [i] [14:33:00] All services healthy', type: 'info', delay: 500 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  MONITORING SUMMARY', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Monitoring duration: 2 minutes 30 seconds', type: 'info', delay: 100 },
+                { text: '  [i] Checks performed: 5', type: 'info', delay: 100 },
+                { text: '  [✓] Services healthy: 5/5', type: 'success', delay: 100 },
+                { text: '  [!] Incidents detected: 1 (Spooler)', type: 'warn', delay: 100 },
+                { text: '  [✓] Auto-restarts: 1 (successful)', type: 'success', delay: 100 },
+                { text: '  [✓] Alerts sent: 1', type: 'success', delay: 100 },
+                { text: '  [i] Log file: .\Logs\ServiceMonitor_20250701.log', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ],
+            backup: [
+                { text: 'PS C:\Scripts> .\M365BackupAudit.ps1 -Tenant "company.onmicrosoft.com" -ExportExcel', type: 'cmd', delay: 0 },
+                { text: '', type: 'output', delay: 300 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  M365 BACKUP AUDIT', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Connecting to Microsoft 365 tenant...', type: 'info', delay: 400 },
+                { text: '  [✓] Authenticated: admin@company.onmicrosoft.com', type: 'success', delay: 300 },
+                { text: '  [i] Tenant: company.onmicrosoft.com', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Phase 1: Exchange Mailbox Backup Audit', type: 'info', delay: 300 },
+                { text: '  [i] Scanning 247 mailboxes...', type: 'info', delay: 400 },
+                { text: '  [✓] Mailboxes with backup: 241/247', type: 'success', delay: 300 },
+                { text: '  [✗] Mailboxes WITHOUT backup: 6', type: 'error', delay: 200 },
+                { text: '  [i]   - temp.user@company.com', type: 'metric', delay: 100 },
+                { text: '  [i]   - contractor.ext@company.com', type: 'metric', delay: 100 },
+                { text: '  [i]   - test.account@company.com', type: 'metric', delay: 100 },
+                { text: '  [i]   - (3 more...)', type: 'metric', delay: 100 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Phase 2: OneDrive Sync Status', type: 'info', delay: 300 },
+                { text: '  [i] Checking 247 OneDrive accounts...', type: 'info', delay: 400 },
+                { text: '  [✓] Sync enabled: 238/247', type: 'success', delay: 300 },
+                { text: '  [✗] Sync disabled: 9', type: 'error', delay: 200 },
+                { text: '  [!] Sync paused >30 days: 3', type: 'warn', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Phase 3: SharePoint Versioning', type: 'info', delay: 300 },
+                { text: '  [i] Checking 42 SharePoint sites...', type: 'info', delay: 400 },
+                { text: '  [✓] Versioning enabled: 38/42', type: 'success', delay: 300 },
+                { text: '  [✗] Versioning disabled: 4', type: 'error', delay: 200 },
+                { text: '  [i]   - /sites/legacy-project (Major: 0, Minor: 0)', type: 'metric', delay: 100 },
+                { text: '  [i]   - /sites/archive-2023 (Major: 0, Minor: 0)', type: 'metric', delay: 100 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Phase 4: Retention Policy Check', type: 'info', delay: 300 },
+                { text: '  [i] Checking retention labels...', type: 'info', delay: 300 },
+                { text: '  [✓] Retention policies applied: 235/247', type: 'success', delay: 300 },
+                { text: '  [✗] No retention policy: 12', type: 'error', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  COMPLIANCE SCORE', type: 'header', delay: 100 },
+                { text: '===============================================================', type: 'separator', delay: 100 },
+                { text: '  [i] Exchange Backup: 97.6% (241/247)', type: 'metric', delay: 100 },
+                { text: '  [i] OneDrive Sync: 96.4% (238/247)', type: 'metric', delay: 100 },
+                { text: '  [i] SharePoint Versioning: 90.5% (38/42)', type: 'metric', delay: 100 },
+                { text: '  [i] Retention Policy: 95.1% (235/247)', type: 'metric', delay: 100 },
+                { text: '  [i] Overall Compliance Score: 94.9%', type: 'metric', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [i] Exporting Excel report...', type: 'info', delay: 300 },
+                { text: '  [✓] Excel report saved: .\Reports\M365BackupAudit_20250701.xlsx', type: 'success', delay: 400 },
+                { text: '  [i] Sheets: Summary, Exchange, OneDrive, SharePoint, ActionItems', type: 'info', delay: 200 },
+                { text: '', type: 'output', delay: 200 },
+                { text: '  [!] ACTION REQUIRED: 6 mailboxes without backup', type: 'warn', delay: 200 },
+                { text: '  [!] ACTION REQUIRED: 4 SharePoint sites without versioning', type: 'warn', delay: 200 },
+                { text: '', type: 'output', delay: 100 },
+                { text: 'PS C:\Scripts> _', type: 'cmd', delay: 0 }
+            ]
+        };
+
+        // ═══════════════════════════════════════════════════════════════
+        // TERMINAL RUNNER
+        // ═══════════════════════════════════════════════════════════════
+        let terminalRunning = false;
+        let terminalTimeout = null;
+
+        function runDemo() {
+            if (terminalRunning) return;
+            if (!currentDemo) {
+                alert(currentLang === 'es' ? 'Primero selecciona un proyecto o script de la lista de arriba.' : 'Please select a project or script from the list above first.');
+                return;
+            }
+            terminalRunning = true;
+            clearTerminal();
+
+            const lines = currentDemoType === 'project' ? projectDemos[currentDemo] : scriptDemos[currentDemo];
+            const body = document.getElementById('terminalBody');
+            let cumulativeDelay = 0;
+
+            lines.forEach((line, index) => {
+                cumulativeDelay += line.delay;
+                terminalTimeout = setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'term-line';
+
+                    let content = line.text;
+                    if (line.type === 'cmd') {
+                        content = '<span class="term-prompt">PS C:\&gt;</span> <span class="term-cmd">' + escapeHtml(line.text.replace(/^PS C:\[^>]*> /, '')) + '</span>';
+                        if (index === lines.length - 1) {
+                            content += '<span class="term-cmd" style="animation: pulse 1s infinite;">_</span>';
+                        }
+                    } else if (line.type === 'header') {
+                        content = '<span class="term-header">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'separator') {
+                        content = '<span class="term-separator">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'success') {
+                        content = '<span class="term-success">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'error') {
+                        content = '<span class="term-error">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'warn') {
+                        content = '<span class="term-warn">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'metric') {
+                        content = '<span class="term-metric">' + escapeHtml(line.text) + '</span>';
+                    } else if (line.type === 'info') {
+                        content = '<span class="term-info">' + escapeHtml(line.text) + '</span>';
+                    } else {
+                        content = '<span class="term-output">' + escapeHtml(line.text) + '</span>';
+                    }
+
+                    div.innerHTML = content;
+                    body.appendChild(div);
+                    body.scrollTop = body.scrollHeight;
+
+                    if (index === lines.length - 1) {
+                        terminalRunning = false;
+                    }
+                }, cumulativeDelay);
+            });
+        }
+
+        function clearTerminal() {
+            if (terminalTimeout) {
+                clearTimeout(terminalTimeout);
+                terminalTimeout = null;
+            }
+            terminalRunning = false;
+            document.getElementById('terminalBody').innerHTML = '';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Auto-select Kore project on first load
+        window.addEventListener('load', () => {
+            selectProject('kore');
+        });
+    </script>
+</body>
+</html>
